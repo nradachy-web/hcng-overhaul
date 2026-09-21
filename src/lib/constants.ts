@@ -186,12 +186,12 @@ export const EV = {
 export type TelLocation = "header" | "hero" | "sticky" | "body" | "footer";
 
 /* ---------------------------------------------------------------- */
-/* Claims (7.6). One canonical success number sitewide: 89.9%.       */
+/* Claims (7.6). Display the success stat as a whole percentage.     */
 /* If a figure gets pulled, degrade to the two uncontested facts.    */
 /* ---------------------------------------------------------------- */
 
 export const STATS = {
-  success: { value: 89.9, decimals: 1, suffix: "%", caption: "method success rate" },
+  success: { value: 90, decimals: 0, suffix: "%", caption: "method success rate" },
   satisfaction: { value: 94, decimals: 0, suffix: "%", caption: "patient satisfaction" },
   years: { value: 48, decimals: 0, suffix: "", caption: "years combined practice" },
   since: { value: 1976, decimals: 0, suffix: "", caption: "caring for spines since" },
