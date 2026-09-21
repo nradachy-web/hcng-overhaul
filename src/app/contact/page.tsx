@@ -14,6 +14,7 @@ import {
   EV,
   HOURS_TABLE,
   JOTFORM_CONTACT_ID,
+  WEB3FORMS_ACCESS_KEY,
 } from "@/lib/constants";
 import { SocialRow, Web3FormsFallback } from "./contact-client";
 
@@ -134,9 +135,14 @@ export default function ContactPage() {
                 reassurance="Tell us what is going on and we will call you back."
               />
             </Reveal>
-            <Reveal delay={0.14} className="mt-6">
-              <Web3FormsFallback />
-            </Reveal>
+            {/* Hidden until a real Web3Forms key is set: a placeholder key
+                would fail every submission. JotForm, tel, and mailto carry
+                contact until then. */}
+            {!WEB3FORMS_ACCESS_KEY.includes("PLACEHOLDER") && (
+              <Reveal delay={0.14} className="mt-6">
+                <Web3FormsFallback />
+              </Reveal>
+            )}
           </div>
         </div>
       </Band>

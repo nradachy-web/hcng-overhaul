@@ -34,9 +34,9 @@ jobs:
         run: npm run build
         env:
           NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY: ${{ vars.NEXT_PUBLIC_WEB3FORMS_ACCESS_KEY }}
-          # Preview on the GitHub Pages project page. For the real domain cutover:
-          # drop this line and add public/CNAME with hcng.net.
-          NEXT_PUBLIC_BASE_PATH: "/hcng-overhaul"
+          # Served at the domain root (hcng.net, set as the Pages custom domain).
+          # To preview on the project page again, add back:
+          # NEXT_PUBLIC_BASE_PATH: "/hcng-overhaul"
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
