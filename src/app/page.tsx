@@ -28,7 +28,8 @@ export const metadata: Metadata = {
 
 /** Per Dr. Christine (2026-09-22): her favorite photos sit here, front and
  *  center; the previous ones went back behind the LP headlines. Three are
- *  portrait, so the card media is 4:5. */
+ *  portrait, so the card media is 4:5. Order per her 9/22 text: kids third,
+ *  massage fourth. */
 const ROUTER_CARDS = [
   {
     n: 1,
@@ -52,16 +53,6 @@ const ROUTER_CARDS = [
   },
   {
     n: 3,
-    title: "Tension & stress",
-    symptoms: "headaches, knots",
-    label: "Massage",
-    href: "/massage-therapy/",
-    image: "/assets/images/container50.jpg",
-    alt: "The massage room, lit by the candle wall",
-    objectPosition: "50% 55%",
-  },
-  {
-    n: 4,
     title: "Kids & families",
     symptoms: "gentle, playful",
     label: "Kids",
@@ -69,6 +60,16 @@ const ROUTER_CARDS = [
     image: "/assets/images/sep26/kids-hero-baby-green.jpg",
     alt: "Dr. Christine gently checking a baby on a dinosaur blanket in the green kids room",
     objectPosition: "50% 45%",
+  },
+  {
+    n: 4,
+    title: "Tension & stress",
+    symptoms: "headaches, knots",
+    label: "Massage",
+    href: "/massage-therapy/",
+    image: "/assets/images/container50.jpg",
+    alt: "The massage room, lit by the candle wall",
+    objectPosition: "50% 55%",
   },
 ];
 
