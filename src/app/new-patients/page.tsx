@@ -92,22 +92,22 @@ export default function NewPatientsPage() {
               <div className="rounded-[4px] border border-(--hairline) bg-(--card-bg) p-6 shadow-(--card-shadow)">
                 <p className="text-mono-label">New patient forms</p>
                 <p className="text-body mt-3">
-                  Our patient forms are made available online so they can be
-                  completed in the convenience of your own home or office.
+                  Fill them out online in about ten minutes and they go
+                  straight to our front desk. Or print the paper version and
+                  bring it with you.
                 </p>
                 <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <Button size="sm" href="/new-patients/intake/" arrow>
+                    Fill out the forms online
+                  </Button>
                   <Button
                     variant="outline"
                     size="sm"
                     href={NEW_PATIENT_FORMS_URL}
                     external
-                    arrow
                   >
-                    Open the forms
+                    Print the paper version
                   </Button>
-                  <p className="text-mono-cap text-(--muted) uppercase">
-                    Opens in Google Docs
-                  </p>
                 </div>
               </div>
             </Step>
