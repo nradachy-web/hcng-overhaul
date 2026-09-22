@@ -7,6 +7,20 @@ import { Plate } from "@/components/Plate";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import { EV } from "@/lib/constants";
+import { CuratedGallery, type GalleryPhoto } from "@/components/CuratedGallery";
+
+/** The team, together. Sent by Dr. Christine 2026-09-21 ("add to meet the
+ *  team"). People, so plain captions and no figure numbers. */
+const TEAM_PHOTOS: GalleryPhoto[] = [
+  { src: "/assets/images/sep26/team-four-window.jpg", alt: "The four of them by the front window, Dr. Christine in the patterned chair", caption: "The team", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/team-kelli-christine-laugh.jpg", alt: "Kelli and Dr. Christine laughing together on the sofa", caption: "Kelli and Dr. Christine", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/team-three-bw.jpg", alt: "Three of the team in black and white in front of the brass mirror", caption: "The reception room", aspect: "aspect-[3/4]", objectPosition: "50% 40%" },
+  { src: "/assets/images/sep26/team-three-window.jpg", alt: "Three of the team by the front window", caption: "By the window", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/team-kelli-christine-mirror.jpg", alt: "Kelli and Dr. Christine seated under the brass sunburst mirror", caption: "Under the mirror", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/team-christine-kelli-sofa.jpg", alt: "Dr. Christine and Kelli on the black leather sofa", caption: "The sofa", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/team-four-sofa.jpg", alt: "The whole team seated on the sofa under the brass mirror", caption: "All four", aspect: "aspect-[3/4]", objectPosition: "50% 45%" },
+  { src: "/assets/images/sep26/team-kelli-christine-mirror-2.jpg", alt: "Kelli and Dr. Christine in front of the mirror", caption: "Kelli and Dr. Christine", aspect: "aspect-[3/4]" },
+];
 
 /**
  * /meet-the-team/ (DESIGN_DIRECTION 8.7): physicians and staff merged onto
@@ -148,10 +162,13 @@ function CredentialAccordion({
 export default function MeetTheTeamPage() {
   return (
     <>
+      {/* Hero: the whole team on the sofa under the mirror, sent by Dr.
+          Christine 2026-09-21. */}
       <SlimHero
-        image="/assets/images/container53.jpg"
-        imageAlt="Dr. Christine Hanczaryk standing at the front desk, a digital x-ray on the screen behind her"
-        objectPosition="68% 30%"
+        image="/assets/images/sep26/team-four-sofa.jpg"
+        imageAlt="The whole team seated on the black leather sofa under the brass sunburst mirror"
+        objectPosition="50% 42%"
+        minH="min-h-[56vh]"
         eyebrow="The practice"
         title="Meet the team that answers when you call."
       >
@@ -164,15 +181,26 @@ export default function MeetTheTeamPage() {
           <Eyebrow as="h2">Meet The Physicians</Eyebrow>
         </Reveal>
         <div className="mt-10 grid gap-10 lg:grid-cols-12 lg:gap-14">
+          {/* Her two portraits, sent 2026-09-21 ("add to me page"). */}
           <div className="lg:col-span-5">
-            <Reveal className="lg:sticky lg:top-24">
-              <Plate
-                src="/assets/images/image04.jpg"
-                alt="Dr. Christine Hanczaryk, Chiropractor"
-                caption="Dr. Christine Hanczaryk"
-                className="max-w-[380px]"
-              />
-            </Reveal>
+            <RevealGroup className="grid max-w-[380px] gap-5">
+              <RevealItem as="div">
+                <Plate
+                  src="/assets/images/sep26/christine-drip-painting.jpg"
+                  alt="Dr. Christine Hanczaryk seated in a white skirt beneath the drip painting, a monstera beside her"
+                  caption="Dr. Christine Hanczaryk"
+                />
+              </RevealItem>
+              <RevealItem as="div">
+                <Plate
+                  src="/assets/images/sep26/christine-healthy-self-bw.jpg"
+                  alt="Dr. Christine pointing at the Healthy Self Heal Thy Self sign, in black and white"
+                  caption="Healthy self, heal thy self"
+                  aspect="aspect-[4/5]"
+                  objectPosition="50% 30%"
+                />
+              </RevealItem>
+            </RevealGroup>
           </div>
           <div className="lg:col-span-7">
             <Reveal>
@@ -288,6 +316,19 @@ export default function MeetTheTeamPage() {
             <h3 className="text-h3s mt-6">Wendy</h3>
           </RevealItem>
         </RevealGroup>
+      </Band>
+
+      {/* THE TEAM, TOGETHER */}
+      <Band tone="bone">
+        <Reveal>
+          <Eyebrow as="h2">Together</Eyebrow>
+          <p className="text-h2s mt-4 max-w-2xl">The faces you will see every visit.</p>
+        </Reveal>
+        <CuratedGallery
+          photos={TEAM_PHOTOS}
+          visibleCount={8}
+          gridClassName="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-4"
+        />
       </Band>
 
       {/* CLOSING: no dead ends. */}

@@ -40,9 +40,36 @@ const THEO_STORY = [
   "Hoping that changes for me soon as my body adjusts to not being woke up all the time -Pickrell",
 ];
 
-/** Galleries 04+03 curated to 10 (dogs included); all 29 in the lightbox.
- *  Plain warm captions; figure numbers never appear on children. */
+/** Galleries 04+03 curated to 10 (dogs included); all 33 in the lightbox.
+ *  Plain warm captions; figure numbers never appear on children. The first
+ *  four arrived from Dr. Christine on 2026-09-21 ("add to baby page"). */
 const KIDS_PHOTOS: GalleryPhoto[] = [
+  {
+    src: "/assets/images/sep26/kids-pink-cap-baby.jpg",
+    alt: "Dr. Christine in a pink cap checking a newborn in the green kids room",
+    caption: "A newborn check",
+    aspect: "aspect-square",
+    objectPosition: "50% 30%",
+  },
+  {
+    src: "/assets/images/sep26/kids-baby-feet.jpg",
+    alt: "Dr. Christine holding a baby's feet during a gentle check",
+    caption: "Tiny feet",
+    aspect: "aspect-square",
+  },
+  {
+    src: "/assets/images/sep26/kids-micheil-girl.jpg",
+    alt: "Dr. Micheil Hanczaryk adjusting a young girl in pink on the table",
+    caption: "Dr. Micheil and a small patient",
+    aspect: "aspect-square",
+    objectPosition: "50% 30%",
+  },
+  {
+    src: "/assets/images/sep26/kids-dog-and-baby.jpg",
+    alt: "The office dog nose to nose with a smiling baby on the table",
+    caption: "Everyone gets checked",
+    aspect: "aspect-square",
+  },
   {
     src: "/assets/images/gallery04/29df79cd.jpg",
     alt: "A young boy getting a gentle back check in the green kids room",
@@ -183,14 +210,14 @@ const KIDS_PHOTOS: GalleryPhoto[] = [
 export default function KidsPage() {
   return (
     <>
-      {/* The lg zoom shifts the bright white jacket right of the scrim
-          feather; the capped text measure keeps every display word on
-          scrimmed ground (QA contrast fix). */}
+      {/* Hero photo picked by Dr. Christine (2026-09-21): her checking a baby
+          on the dinosaur blanket in the green room. Portrait source, so on
+          lg it rides the right half, masked into the band. */}
       <PhotoHero
-        image="/assets/images/container16.jpg"
-        imageAlt="A mom smiling over her baby during an adjustment in the green kids room"
-        objectPosition="58% 35%"
-        imgClassName="lg:scale-[1.22] lg:origin-[0%_60%]"
+        image="/assets/images/sep26/kids-hero-baby-green.jpg"
+        imageAlt="Dr. Christine Hanczaryk gently checking a baby on a dinosaur blanket in the green kids room"
+        objectPosition="50% 35%"
+        imgClassName="lg:left-[44%] lg:[mask-image:linear-gradient(90deg,transparent,black_28%)]"
         textMaxW="max-w-xl"
         eyebrow="Chiropractic and kids"
         accent={ACCENT}
@@ -276,7 +303,7 @@ export default function KidsPage() {
           photos={KIDS_PHOTOS}
           visibleCount={10}
           gridClassName="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-5"
-          viewAllLabel="View all 29 photos"
+          viewAllLabel="View all 33 photos"
         />
       </Band>
 

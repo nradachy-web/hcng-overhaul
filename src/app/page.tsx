@@ -7,6 +7,7 @@ import { MapFacade, VideoPlate } from "@/components/Embeds";
 import { HomeHero } from "@/components/HomeHero";
 import { OpenNow } from "@/components/OpenNow";
 import { Plate } from "@/components/Plate";
+import { CuratedGallery, type GalleryPhoto } from "@/components/CuratedGallery";
 import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { GaugeRow } from "@/components/StatDial";
 import { StickyCallBar } from "@/components/StickyCallBar";
@@ -87,6 +88,19 @@ const REVIEWS = [
     quote:
       "Dr. Christine is so incredibly knowledgeable about the chiropractic craft and Kelly is the bow on top - those type of people you can just enjoy and trust. It is very apparent they care about you and your health more than your pocket book and anyone who goes or has gone through their program would agree. I truly recommend the Hanczaryk Chiropractic Neurology Group to anyone seeking chiropractic care. Period.",
   },
+];
+
+/** The reception room, then every treatment room. Rooms, so figure numbers
+ *  would be licensed, but this strip stays plain and hands off to the tour. */
+const ROOM_PHOTOS: GalleryPhoto[] = [
+  { src: "/assets/images/sep26/reception-room.jpg", alt: "The reception room: black leather sofa, monstera, the brass sunburst mirror, and the fireplace room beyond", caption: "The reception room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/gallery02/35f2f78a.jpg", alt: "The purple treatment room with its white geometric lines", caption: "The purple room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/gallery02/07f1ea7f.jpg", alt: "The green treatment room, table and lamp", caption: "The green room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/gallery02/ae894733.jpg", alt: "A treatment room in deep plum, lit by a table lamp", caption: "The plum room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/gallery02/b1335fd7.jpg", alt: "The red treatment room", caption: "The red room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/gallery02/81242a0c.jpg", alt: "The chartreuse treatment room with two tables", caption: "The chartreuse room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/sep26/rehab-room.jpg", alt: "The rehabilitation room: teal walls, posture stations, foam rollers, and stability balls", caption: "The rehabilitation room", aspect: "aspect-[4/3]" },
+  { src: "/assets/images/gallery02/aceb31f1.jpg", alt: "The gallery hall: framed photographs along a warm hallway", caption: "The gallery hall", aspect: "aspect-[4/3]" },
 ];
 
 export default function HomePage() {
@@ -235,32 +249,13 @@ export default function HomePage() {
             </footer>
           </blockquote>
         </Reveal>
-        <RevealGroup className="mt-12 grid gap-5 sm:grid-cols-3">
-          <RevealItem as="div">
-            <Plate
-              src="/assets/images/gallery02/dcdc267f.jpg"
-              alt="The lobby fireplace corner: wingback chair, fur rug, and a geometric wood pendant light"
-              caption="The lobby"
-              aspect="aspect-[3/4]"
-            />
-          </RevealItem>
-          <RevealItem as="div">
-            <Plate
-              src="/assets/images/gallery02/ae894733.jpg"
-              alt="A treatment room in deep plum, lit by a table lamp"
-              caption="A treatment room"
-              aspect="aspect-[3/4]"
-            />
-          </RevealItem>
-          <RevealItem as="div">
-            <Plate
-              src="/assets/images/gallery02/aceb31f1.jpg"
-              alt="The gallery hall: framed photographs along a warm hallway"
-              caption="The gallery hall"
-              aspect="aspect-[3/4]"
-            />
-          </RevealItem>
-        </RevealGroup>
+        {/* Per Dr. Christine (2026-09-21): the front reception room leads,
+            and every treatment room shows, not one. */}
+        <CuratedGallery
+          photos={ROOM_PHOTOS}
+          visibleCount={8}
+          gridClassName="mt-12 grid gap-5 grid-cols-2 lg:grid-cols-4"
+        />
         <Reveal className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-5">
           <Button variant="outline" href="/our-office/" arrow>
             Tour the office

@@ -1,12 +1,14 @@
 "use client";
 
 /**
- * Global header (DESIGN_DIRECTION 6): charcoal-850, sticky, 64px compressing
- * to 52px on scroll. Logo left; text links Decompression, Chiropractic,
- * Massage, Kids, More; right, the phone chip (the only pill on the site):
- * brass hairline border, led open-now dot with computed label, mono
- * CALL 810.584.7170. The open-now label drops when compressed; the number
- * never does. Icon-plus-number below 420px.
+ * Global header (DESIGN_DIRECTION 6): charcoal-850, sticky, 76px compressing
+ * to 60px on scroll. Logo left, sized up per the client (2026-09-21); text
+ * links Decompression, Chiropractic, Massage, Kids, then at xl the six
+ * secondary pages inline (the client asked for them "up top"), below xl a
+ * More menu; right, the phone chip (the only pill on the site): brass
+ * hairline border, led open-now dot with computed label, mono
+ * CALL 810.584.7170. The open-now label shows only at 2xl and drops when
+ * compressed; the number never does. Icon-plus-number below 420px.
  */
 
 import { useEffect, useRef, useState } from "react";
@@ -58,14 +60,14 @@ export function Header() {
   }, [moreOpen]);
 
   const linkClass =
-    "text-mono-label px-3 py-2 text-paper-50/80 transition-colors duration-150 hover:text-paper-50";
+    "text-mono-label px-3 py-2 text-paper-50/80 transition-colors duration-150 hover:text-paper-50 xl:px-2 xl:text-[12px]";
 
   return (
     <header className="band-charcoal sticky top-0 z-50 border-b border-(--hairline) bg-charcoal-850">
       <div
         className={cn(
           "container-site flex items-center justify-between gap-3 transition-[height] duration-200",
-          compressed ? "h-[52px]" : "h-16",
+          compressed ? "h-[60px]" : "h-[76px]",
         )}
       >
         <Link
@@ -78,7 +80,7 @@ export function Header() {
             alt={SITE_NAME}
             className={cn(
               "w-auto transition-[height] duration-200",
-              compressed ? "h-9" : "h-11",
+              compressed ? "h-12" : "h-[60px]",
             )}
           />
         </Link>
@@ -92,7 +94,14 @@ export function Header() {
                 </Link>
               </li>
             ))}
-            <li ref={moreRef} className="relative">
+            {NAV_MORE.map((item) => (
+              <li key={item.href} className="hidden xl:block">
+                <Link href={item.href} className={linkClass}>
+                  {item.label}
+                </Link>
+              </li>
+            ))}
+            <li ref={moreRef} className="relative xl:hidden">
               <button
                 type="button"
                 className={cn(linkClass, "flex items-center gap-1")}
@@ -137,8 +146,8 @@ export function Header() {
             <OpenNowDot open={open} />
             <span
               className={cn(
-                "hidden text-paper-50/70 xl:inline",
-                compressed && "xl:hidden",
+                "hidden text-paper-50/70 2xl:inline",
+                compressed && "2xl:hidden",
               )}
             >
               {label}
@@ -146,8 +155,8 @@ export function Header() {
             <span
               aria-hidden="true"
               className={cn(
-                "hidden h-3 w-px bg-paper-50/25 xl:block",
-                compressed && "xl:hidden",
+                "hidden h-3 w-px bg-paper-50/25 2xl:block",
+                compressed && "2xl:hidden",
               )}
             />
             <Phone aria-hidden="true" className="h-3.5 w-3.5 min-[421px]:hidden" />

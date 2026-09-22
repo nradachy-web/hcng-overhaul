@@ -5,6 +5,7 @@ import { SequenceCrescent } from "@/components/BrassDial";
 import { JotFormShell, MapFacade } from "@/components/Embeds";
 import { OpenNow } from "@/components/OpenNow";
 import { SlimHero } from "@/components/PageHero";
+import { Plate } from "@/components/Plate";
 import { Reveal } from "@/components/Reveal";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import {
@@ -53,7 +54,13 @@ function Step({
 export default function NewPatientsPage() {
   return (
     <>
+      {/* Brand photos sent by Dr. Christine 2026-09-21: the crescent C
+          reflected in the sunburst mirror carries the hero; the patient
+          folder sits beside the steps. */}
       <SlimHero
+        image="/assets/images/sep26/brand-mirror-logo.jpg"
+        imageAlt="The crescent C logo reflected in the center of the brass sunburst mirror"
+        objectPosition="50% 38%"
         eyebrow="New patients"
         title="Your first visit, start to finish."
         openNow
@@ -67,8 +74,9 @@ export default function NewPatientsPage() {
           <Eyebrow>Step by step</Eyebrow>
           <h2 className="text-h2s mt-4">Before you arrive</h2>
         </Reveal>
-        <Reveal delay={0.07}>
-          <div className="relative mt-12">
+        <div className="mt-12 grid gap-10 lg:grid-cols-12 lg:gap-14">
+        <Reveal delay={0.07} className="lg:col-span-7">
+          <div className="relative">
             <div
               aria-hidden="true"
               className="tick-rule-v absolute top-2 bottom-2 left-[22px] hidden sm:block"
@@ -113,6 +121,17 @@ export default function NewPatientsPage() {
             </ol>
           </div>
         </Reveal>
+        <Reveal delay={0.14} className="lg:col-span-5">
+          <Plate
+            src="/assets/images/sep26/brand-folder-monstera.jpg"
+            alt="Dr. Christine holding the black HCNG patient folder beside a monstera"
+            caption="Your folder, ready at the desk"
+            aspect="aspect-[3/4]"
+            objectPosition="50% 35%"
+            className="lg:max-w-[380px] lg:justify-self-end"
+          />
+        </Reveal>
+        </div>
       </Band>
 
       {/* GOOD TO KNOW: two quiet cards, verbatim insurance and payment copy. */}

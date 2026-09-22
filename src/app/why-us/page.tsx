@@ -166,9 +166,9 @@ export default function WhyUsPage() {
             <RevealGroup className="grid gap-5">
               <RevealItem as="figure">
                 <Plate
-                  src="/assets/images/gallery02/a2217a66.jpg"
-                  alt="The lobby lounge: a black leather sofa, monstera plants, and the fireplace room beyond"
-                  caption="The lobby"
+                  src="/assets/images/sep26/reception-room.jpg"
+                  alt="The reception room: a black leather sofa, monstera plants, the brass mirror, and the fireplace room beyond"
+                  caption="The reception room"
                   aspect="aspect-[3/2]"
                 />
               </RevealItem>

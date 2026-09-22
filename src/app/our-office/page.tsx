@@ -9,6 +9,7 @@ import { Reveal, RevealGroup, RevealItem } from "@/components/Reveal";
 import { StickyCallBar } from "@/components/StickyCallBar";
 import { EV, HOURS_TABLE, SOCIALS, TIKTOK_HANDLE } from "@/lib/constants";
 import { TourStrip, type TourPhoto } from "./TourStrip";
+import { CuratedGallery, type GalleryPhoto } from "@/components/CuratedGallery";
 
 /**
  * /our-office/ (DESIGN_DIRECTION 8.8): the retreat, the one licensed
@@ -22,7 +23,7 @@ import { TourStrip, type TourPhoto } from "./TourStrip";
 export const metadata: Metadata = {
   title: "Our Urban Retreat",
   description:
-    "Tour the office: the lounge, treatment rooms, therapy room, and the words on our walls. 8185 Holly Road Suite 14, Grand Blanc, MI. Call 810.584.7170.",
+    "Tour the office: the reception room, treatment rooms, rehabilitation room, and the words on our walls. 8185 Holly Road Suite 14, Grand Blanc, MI. Call 810.584.7170.",
   alternates: { canonical: "/our-office/" },
 };
 
@@ -71,35 +72,42 @@ const CHAPTERS: Chapter[] = [
     ],
   },
   {
-    id: "lounge",
+    id: "reception-room",
     n: "02",
-    title: "The Lounge",
+    title: "The Reception Room",
     photos: [
       {
-        src: "/assets/images/gallery02/7a0edab8.jpg",
-        alt: "The lounge: a black leather sofa and the brass sunburst mirror on a charcoal wall",
-        caption: "The mirror wall",
+        src: "/assets/images/sep26/reception-room.jpg",
+        alt: "The reception room: black leather sofa, monstera, the brass sunburst mirror, and the fireplace room beyond",
+        caption: "The reception room",
         fig: "FIG. 05",
         wide: true,
       },
       {
-        src: "/assets/images/gallery02/a2217a66.jpg",
-        alt: "The lounge looking toward the fireplace room, monstera plants and a black sofa",
-        caption: "The lounge",
+        src: "/assets/images/gallery02/7a0edab8.jpg",
+        alt: "The reception room: a black leather sofa and the brass sunburst mirror on a charcoal wall",
+        caption: "The mirror wall",
         fig: "FIG. 06",
+        wide: true,
+      },
+      {
+        src: "/assets/images/gallery02/a2217a66.jpg",
+        alt: "The reception room looking toward the fireplace room, monstera plants and a black sofa",
+        caption: "Toward the fireplace",
+        fig: "FIG. 07",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/dcdc267f.jpg",
         alt: "The fireplace corner: white mantel, fur rug, poufs, and a geometric wood pendant light",
         caption: "The fireplace corner",
-        fig: "FIG. 07",
+        fig: "FIG. 08",
       },
       {
         src: "/assets/images/gallery02/8aa12982.jpg",
         alt: "A Pac-Man arcade table with two yellow stools under an antler and macrame wall hanging",
         caption: "The arcade corner",
-        fig: "FIG. 08",
+        fig: "FIG. 09",
       },
     ],
   },
@@ -112,84 +120,91 @@ const CHAPTERS: Chapter[] = [
         src: "/assets/images/gallery02/35f2f78a.jpg",
         alt: "The purple treatment room: white geometric lines on the wall and a black lounge chair",
         caption: "The purple room",
-        fig: "FIG. 09",
+        fig: "FIG. 10",
       },
       {
         src: "/assets/images/gallery02/07f1ea7f.jpg",
         alt: "The green treatment room: adjustment table, two black chairs, and a table lamp",
         caption: "The green room",
-        fig: "FIG. 10",
+        fig: "FIG. 11",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/ae894733.jpg",
         alt: "The plum treatment room, lit by a table lamp",
         caption: "The plum room",
-        fig: "FIG. 11",
+        fig: "FIG. 12",
       },
       {
         src: "/assets/images/gallery02/b1335fd7.jpg",
         alt: "The red treatment room: an adjustment table, a corkboard map of the United States, and a lamp",
         caption: "The red room",
-        fig: "FIG. 12",
+        fig: "FIG. 13",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/407b4013.jpg",
         alt: "The red treatment room with two adjustment tables and framed art",
         caption: "Two tables",
-        fig: "FIG. 13",
+        fig: "FIG. 14",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/81242a0c.jpg",
         alt: "The chartreuse treatment room: two adjustment tables under a Be A Good Person canvas",
         caption: "The chartreuse room",
-        fig: "FIG. 14",
+        fig: "FIG. 15",
       },
     ],
   },
   {
-    id: "therapy-room",
+    id: "rehabilitation-room",
     n: "04",
-    title: "The Therapy Room",
+    title: "The Rehabilitation Room",
     photos: [
       {
+        src: "/assets/images/sep26/rehab-room.jpg",
+        alt: "The rehabilitation room: teal walls, posture stations, foam rollers, and stability balls on a wood floor",
+        caption: "The rehabilitation room",
+        fig: "FIG. 16",
+        wide: true,
+      },
+      {
         src: "/assets/images/gallery02/5db6c183.jpg",
-        alt: "The hallway approach to the therapy room, barn doors and track lighting",
+        alt: "The hallway approach to the rehabilitation room, barn doors and track lighting",
         caption: "The approach",
-        fig: "FIG. 15",
+        fig: "FIG. 17",
       },
       {
         src: "/assets/images/gallery02/12cc45a1.jpg",
-        alt: "The therapy room: green walls, posture stations, and stability balls on a wood floor",
-        caption: "The therapy room",
-        fig: "FIG. 16",
+        alt: "The rehabilitation room: green walls, posture stations, and stability balls on a wood floor",
+        caption: "The stations",
+        fig: "FIG. 18",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/2c853bd1.jpg",
         alt: "Posture stations and stability balls along the therapy room wall",
         caption: "Posture stations",
-        fig: "FIG. 17",
+        fig: "FIG. 19",
       },
       {
         src: "/assets/images/gallery02/40e2abc3.jpg",
         alt: "The therapy room's green wall with training stations and mirrors",
         caption: "The green wall",
-        fig: "FIG. 18",
+        fig: "FIG. 20",
       },
       {
         src: "/assets/images/gallery02/88ab75c1.jpg",
         alt: "Foam rollers and stability balls in the therapy room",
         caption: "Rollers and balls",
-        fig: "FIG. 19",
+        fig: "FIG. 21",
       },
       {
         src: "/assets/images/gallery02/d3764c20.jpg",
         alt: "Foam rollers and stability balls below the wood slat wall",
         caption: "The gear",
-        fig: "FIG. 20",
+        fig: "FIG. 22",
         wide: true,
       },
     ],
@@ -203,38 +218,38 @@ const CHAPTERS: Chapter[] = [
         src: "/assets/images/gallery02/aceb31f1.jpg",
         alt: "Framed photographs along the carpeted hallway",
         caption: "The gallery hall",
-        fig: "FIG. 21",
+        fig: "FIG. 23",
       },
       {
         src: "/assets/images/gallery02/798d6e6d.jpg",
         alt: "The hallway of barn doors and track lighting, the lobby at the far end",
         caption: "Down the hall",
-        fig: "FIG. 22",
+        fig: "FIG. 24",
       },
       {
         src: "/assets/images/gallery02/4e624f4c.jpg",
         alt: "A framed print that reads Life is very short and there's no time for fussing and fighting my friends",
         caption: "Life is very short",
-        fig: "FIG. 23",
+        fig: "FIG. 25",
       },
       {
         src: "/assets/images/gallery02/575fbd1d.jpg",
         alt: "A wall sign that reads The only way to do great work is to love what you do",
         caption: "Great work",
-        fig: "FIG. 24",
+        fig: "FIG. 26",
       },
       {
         src: "/assets/images/gallery02/4a6b97c9.jpg",
         alt: "A canvas by the window that reads Live like you mean it",
         caption: "Live like you mean it",
-        fig: "FIG. 25",
+        fig: "FIG. 27",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/f90b1284.jpg",
         alt: "The welcome manifesto sign beside the window blinds",
         caption: "You are welcome here",
-        fig: "FIG. 26",
+        fig: "FIG. 28",
         wide: true,
       },
     ],
@@ -245,46 +260,81 @@ const CHAPTERS: Chapter[] = [
     title: "The Words on Our Walls",
     photos: [
       {
+        src: "/assets/images/sep26/sign-healthy-self.jpg",
+        alt: "The Healthy Self Heal Thy Self sign under warm light",
+        caption: "Healthy self, heal thy self",
+        fig: "FIG. 29",
+        wide: true,
+      },
+      {
+        src: "/assets/images/sep26/sign-what-starts-here.jpg",
+        alt: "A hand-lettered canvas that reads What starts here changes lives, above a table lamp",
+        caption: "What starts here",
+        fig: "FIG. 30",
+      },
+      {
         src: "/assets/images/gallery02/2c8d01de.jpg",
         alt: "A wood sign that reads Stressed, Blessed and Coffee Obsessed",
         caption: "Stressed, blessed",
-        fig: "FIG. 27",
+        fig: "FIG. 31",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/adfb1892.jpg",
         alt: "A painted sign that reads Healthy Self Heal Thy Self",
         caption: "Healthy self, heal thy self",
-        fig: "FIG. 28",
+        fig: "FIG. 32",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/097dee03.jpg",
         alt: "A pink canvas that reads Faith isn't hoping God will help you, faith is knowing help is on the way",
         caption: "Faith",
-        fig: "FIG. 29",
+        fig: "FIG. 33",
       },
       {
         src: "/assets/images/gallery02/27891f3d.jpg",
         alt: "A canvas that reads What starts here changes lives, beside a table lamp",
         caption: "What starts here",
-        fig: "FIG. 30",
+        fig: "FIG. 34",
       },
       {
         src: "/assets/images/gallery02/16f81aac.jpg",
         alt: "A patterned canvas with Dream Big in gold script",
         caption: "Dream big",
-        fig: "FIG. 31",
+        fig: "FIG. 35",
         wide: true,
       },
       {
         src: "/assets/images/gallery02/d33b90f4.jpg",
         alt: "A printed manifesto that ends You are welcome here",
         caption: "You are welcome here",
-        fig: "FIG. 32",
+        fig: "FIG. 36",
       },
     ],
   },
+];
+
+/** Dr. Christine around the office, sent 2026-09-21. No figure numbers. */
+const CHRISTINE_PHOTOS: GalleryPhoto[] = [
+  { src: "/assets/images/sep26/christine-xray-screen.jpg", alt: "Dr. Christine reading a digital x-ray on the wall screen", caption: "Reading the x-ray", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-shake-your-booty.jpg", alt: "Dr. Christine holding a letter board that reads Why be moody, shake your booty", caption: "House rules", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-window-chair.jpg", alt: "Dr. Christine seated in the patterned chair by the front window", caption: "The front window", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-adjustment-rooms-sign.jpg", alt: "Dr. Christine at the Adjustment Rooms sign", caption: "Adjustment rooms", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-bubble-chair.jpg", alt: "Dr. Christine in the hanging bubble chair", caption: "The bubble chair", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-arms-up-tables.jpg", alt: "Dr. Christine, arms up, between two adjusting tables in the red and yellow room", caption: "Two tables", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-on-the-counter.jpg", alt: "Dr. Christine seated on the granite front counter", caption: "The front counter", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-hat-boots-logo.jpg", alt: "Dr. Christine in a hat and white boots beside the crescent C logo", caption: "By the crescent", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-portrait-bw.jpg", alt: "A black and white portrait of Dr. Christine", caption: "Portrait", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-purple-doorway.jpg", alt: "Dr. Christine in the doorway of the purple geometric room", caption: "The purple room", aspect: "aspect-[3/4]" },
+  { src: "/assets/images/sep26/christine-yellow-suit.jpg", alt: "Dr. Christine in a yellow striped suit and hat in the hallway", caption: "The hallway" },
+  { src: "/assets/images/sep26/christine-black-jumpsuit-hall.jpg", alt: "Dr. Christine in the gallery hallway", caption: "The gallery hall" },
+  { src: "/assets/images/sep26/christine-leopard-hall.jpg", alt: "Dr. Christine in the hallway by the posture station", caption: "The posture station" },
+  { src: "/assets/images/sep26/christine-hall-arms-out.jpg", alt: "Dr. Christine, arms out, in the hallway", caption: "Welcome in" },
+  { src: "/assets/images/sep26/christine-hat-chair.jpg", alt: "Dr. Christine in a hat, seated in a wingback chair", caption: "The wingback" },
+  { src: "/assets/images/sep26/christine-coke.jpg", alt: "Dr. Christine sipping a Coke", caption: "Break time" },
+  { src: "/assets/images/sep26/christine-drip-painting-2.jpg", alt: "Dr. Christine seated in a white skirt under the drip painting", caption: "Under the painting" },
+  { src: "/assets/images/sep26/christine-healthy-self-bw-2.jpg", alt: "Dr. Christine pointing at the Healthy Self Heal Thy Self sign", caption: "Healthy self" },
 ];
 
 /** Life at HCNG: event photos and clips. Plain captions, no figure numbers. */
@@ -404,7 +454,7 @@ export default function OurOfficePage() {
       <Band tone="espresso-deep">
         <Reveal>
           <Eyebrow as="h2">The tour</Eyebrow>
-          <p className="text-h2s mt-4 max-w-2xl">Six rooms, thirty two photographs.</p>
+          <p className="text-h2s mt-4 max-w-2xl">Six rooms, thirty six photographs.</p>
         </Reveal>
         {/* grid-cols-1 (repeat(1, minmax(0,1fr))) so the TourStrip's
             shrink-0 plates scroll inside the ul instead of expanding the
@@ -459,6 +509,24 @@ export default function OurOfficePage() {
             ))}
           </div>
         </div>
+      </Band>
+
+      {/* THE DOCTOR, AROUND THE OFFICE: eighteen portraits Dr. Christine
+          sent 2026-09-21 ("add to wherever is cool"). People, so plain
+          captions and no figure numbers. */}
+      <Band tone="bone">
+        <Reveal>
+          <Eyebrow as="h2">The doctor, around the office</Eyebrow>
+          <p className="text-h2s mt-4 max-w-2xl">
+            Dr. Christine, in her element.
+          </p>
+        </Reveal>
+        <CuratedGallery
+          photos={CHRISTINE_PHOTOS}
+          visibleCount={10}
+          gridClassName="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-5"
+          viewAllLabel="View all 18 photos"
+        />
       </Band>
 
       {/* LIFE AT HCNG */}

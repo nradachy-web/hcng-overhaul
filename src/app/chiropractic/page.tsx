@@ -12,6 +12,7 @@ import { StickyCallBar } from "@/components/StickyCallBar";
 import { TestimonialPlate } from "@/components/TestimonialPlate";
 import { EV, STATS, YOUTUBE_TESTIMONIALS } from "@/lib/constants";
 import { CuratedGallery, type GalleryPhoto } from "@/components/CuratedGallery";
+import { VideoPlate } from "@/components/Embeds";
 
 /**
  * /chiropractic/ (DESIGN_DIRECTION 8.3): service LP on the 8.2 template,
@@ -159,8 +160,51 @@ const EDUCATION: FaqItem[] = [
   },
 ];
 
-/** Galleries 05+01 curated to 8; all 23 reachable in the lightbox. */
+/** Galleries 05+01 curated to 8; all 30 reachable in the lightbox. The
+ *  first seven arrived from Dr. Christine on 2026-09-21 ("add to adjusting"). */
 const ADJUSTMENT_PHOTOS: GalleryPhoto[] = [
+  {
+    src: "/assets/images/sep26/adjust-hands-green.jpg",
+    alt: "Dr. Christine, hands on a patient's low back in the green room",
+    caption: "The green room",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "/assets/images/sep26/adjust-activator-snake.jpg",
+    alt: "Dr. Christine using the activator instrument on a patient's back",
+    caption: "The activator",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "/assets/images/sep26/adjust-hands-plum.jpg",
+    alt: "A low back adjustment in the plum room",
+    caption: "The plum room",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "/assets/images/sep26/adjust-seated-teal.jpg",
+    alt: "A seated adjustment in the teal therapy room",
+    caption: "Seated work",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "/assets/images/sep26/adjust-beanie-green.jpg",
+    alt: "Dr. Christine in a beanie adjusting a patient face down in the green room",
+    caption: "The green room",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "/assets/images/sep26/adjust-activator-green.jpg",
+    alt: "The activator instrument in use, green room",
+    caption: "The activator",
+    aspect: "aspect-[3/4]",
+  },
+  {
+    src: "/assets/images/sep26/adjust-bigfoot.jpg",
+    alt: "Dr. Christine adjusting the office Bigfoot statue in the green room",
+    caption: "Even Bigfoot gets adjusted",
+    aspect: "aspect-[3/4]",
+  },
   {
     src: "/assets/images/gallery05/0bf767fa.jpg",
     alt: "A low back adjustment in the green treatment room",
@@ -290,10 +334,14 @@ const ACA_PLATES: GalleryPhoto[] = [
 export default function ChiropracticPage() {
   return (
     <>
+      {/* Hero photo picked by Dr. Christine (2026-09-21): the hex wall
+          adjustment. Portrait source, so on lg it rides the right half,
+          masked into the band; below lg it is full-bleed under the scrim. */}
       <PhotoHero
-        image="/assets/images/container29.jpg"
-        imageAlt="Dr. Christine Hanczaryk adjusting a patient in the purple treatment room"
-        objectPosition="60% 38%"
+        image="/assets/images/gallery05/41564038.jpg"
+        imageAlt="Dr. Christine Hanczaryk, laughing under a green Malibu cap, adjusting a patient in front of the brass hex wall"
+        objectPosition="50% 0%"
+        imgClassName="lg:left-[44%] lg:[mask-image:linear-gradient(90deg,transparent,black_28%)]"
         eyebrow="Chiropractic care"
         accent={ACCENT}
         title="When your back gives out, everything else does too."
@@ -424,8 +472,18 @@ export default function ChiropracticPage() {
           photos={ADJUSTMENT_PHOTOS}
           visibleCount={8}
           gridClassName="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-4"
-          viewAllLabel="View all 23 photos"
+          viewAllLabel="View all 30 photos"
         />
+        {/* Her Halloween adjustment clip, sent 2026-09-21 with the photos. */}
+        <div className="mt-5 grid gap-5 grid-cols-2 lg:grid-cols-4">
+          <VideoPlate
+            src="/assets/videos/adjust-halloween.mp4"
+            poster="/assets/videos/adjust-halloween_poster.jpg"
+            title="Dr. Christine adjusting a seated patient on Halloween"
+            caption="Halloween, seated"
+            aspect="aspect-[3/4]"
+          />
+        </div>
       </Band>
 
       {/* YOUR DOCTORS */}
