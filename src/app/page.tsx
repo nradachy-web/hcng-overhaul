@@ -26,6 +26,9 @@ export const metadata: Metadata = {
   alternates: { canonical: "/" },
 };
 
+/** Per Dr. Christine (2026-09-22): her favorite photos sit here, front and
+ *  center; the previous ones went back behind the LP headlines. Three are
+ *  portrait, so the card media is 4:5. */
 const ROUTER_CARDS = [
   {
     n: 1,
@@ -33,9 +36,9 @@ const ROUTER_CARDS = [
     symptoms: "stiffness, headaches",
     label: "Chiropractic",
     href: "/chiropractic/",
-    image: "/assets/images/container29.jpg",
-    alt: "An adjustment in the purple treatment room",
-    objectPosition: "50% 30%",
+    image: "/assets/images/gallery05/41564038.jpg",
+    alt: "Dr. Christine, laughing under a green Malibu cap, adjusting a patient in front of the brass hex wall",
+    objectPosition: "50% 40%",
   },
   {
     n: 2,
@@ -43,9 +46,9 @@ const ROUTER_CARDS = [
     symptoms: "herniated, numbness",
     label: "Decompression",
     href: "/spinal-decompression/",
-    image: "/assets/images/container43.jpg",
-    alt: "The Hill DT spinal decompression table and its glowing console",
-    objectPosition: "40% 50%",
+    image: "/assets/images/sep26/decompression-hero-console.jpg",
+    alt: "Dr. Christine at the Hill DT console, a patient on the decompression table behind her",
+    objectPosition: "50% 40%",
   },
   {
     n: 3,
@@ -63,9 +66,9 @@ const ROUTER_CARDS = [
     symptoms: "gentle, playful",
     label: "Kids",
     href: "/kids/",
-    image: "/assets/images/container16.jpg",
-    alt: "A mom smiling over her baby during an adjustment",
-    objectPosition: "50% 35%",
+    image: "/assets/images/sep26/kids-hero-baby-green.jpg",
+    alt: "Dr. Christine gently checking a baby on a dinosaur blanket in the green kids room",
+    objectPosition: "50% 45%",
   },
 ];
 
@@ -134,7 +137,7 @@ export default function HomePage() {
               as="article"
               className="plate flex h-full flex-col overflow-hidden rounded-[4px] border border-(--hairline) bg-(--card-bg) shadow-(--card-shadow)"
             >
-              <div className="plate-media aspect-[4/3]">
+              <div className="plate-media aspect-[4/5]">
                 <img
                   src={asset(card.image)}
                   alt={card.alt}

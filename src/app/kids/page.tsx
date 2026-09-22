@@ -210,14 +210,15 @@ const KIDS_PHOTOS: GalleryPhoto[] = [
 export default function KidsPage() {
   return (
     <>
-      {/* Hero photo picked by Dr. Christine (2026-09-21): her checking a baby
-          on the dinosaur blanket in the green room. Portrait source, so on
-          lg it rides the right half, masked into the band. */}
+      {/* Per Dr. Christine (2026-09-22): her dinosaur-blanket photo sits on
+          the home router card; this one stays behind the words. The lg zoom
+          shifts the bright white jacket right of the scrim feather; the
+          capped text measure keeps every display word on scrimmed ground. */}
       <PhotoHero
-        image="/assets/images/sep26/kids-hero-baby-green.jpg"
-        imageAlt="Dr. Christine Hanczaryk gently checking a baby on a dinosaur blanket in the green kids room"
-        objectPosition="50% 40%"
-        imgClassName="lg:left-auto lg:w-[min(42%,640px)] lg:[mask-image:linear-gradient(90deg,transparent,black_30%)]"
+        image="/assets/images/container16.jpg"
+        imageAlt="A mom smiling over her baby during an adjustment in the green kids room"
+        objectPosition="58% 35%"
+        imgClassName="lg:scale-[1.22] lg:origin-[0%_60%]"
         textMaxW="max-w-xl"
         eyebrow="Chiropractic and kids"
         accent={ACCENT}

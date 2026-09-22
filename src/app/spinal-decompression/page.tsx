@@ -213,14 +213,12 @@ function Step({ n, heading, body }: { n: number; heading: string; body: string }
 export default function SpinalDecompressionPage() {
   return (
     <>
-      {/* Hero photo picked by Dr. Christine (2026-09-21): her at the Hill DT
-          console with a patient on the table. Portrait source, so on lg it
-          rides the right half, masked into the band. */}
+      {/* Per Dr. Christine (2026-09-22): her console photo sits on the home
+          router card; the table stays behind the words. */}
       <PhotoHero
-        image="/assets/images/sep26/decompression-hero-console.jpg"
-        imageAlt="Dr. Christine Hanczaryk at the Hill DT console, a patient lying on the decompression table behind her"
-        objectPosition="50% 35%"
-        imgClassName="lg:left-auto lg:w-[min(42%,640px)] lg:[mask-image:linear-gradient(90deg,transparent,black_30%)]"
+        image="/assets/images/container43.jpg"
+        imageAlt="The Hill DT decompression table mid-session, its console glowing in the treatment room"
+        objectPosition="62% 45%"
         eyebrow="Non-surgical spinal decompression, Hill DT"
         accent={ACCENT}
         title="A herniated disc does not have to mean surgery."

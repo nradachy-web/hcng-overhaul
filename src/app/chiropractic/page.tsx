@@ -334,15 +334,12 @@ const ACA_PLATES: GalleryPhoto[] = [
 export default function ChiropracticPage() {
   return (
     <>
-      {/* Hero photo picked by Dr. Christine (2026-09-21): the hex wall
-          adjustment. Portrait source, so on lg it rides a capped column at
-          the right, masked into the band, tall enough that her face and her
-          hands on the patient both show; below lg it is full-bleed. */}
+      {/* Per Dr. Christine (2026-09-22): the hex wall shot she loves sits on
+          the home router card; this one stays behind the words. */}
       <PhotoHero
-        image="/assets/images/gallery05/41564038.jpg"
-        imageAlt="Dr. Christine Hanczaryk, laughing under a green Malibu cap, adjusting a patient in front of the brass hex wall"
-        objectPosition="50% 35%"
-        imgClassName="lg:left-auto lg:w-[min(42%,640px)] lg:[mask-image:linear-gradient(90deg,transparent,black_30%)]"
+        image="/assets/images/container29.jpg"
+        imageAlt="Dr. Christine Hanczaryk adjusting a patient in the purple treatment room"
+        objectPosition="60% 38%"
         eyebrow="Chiropractic care"
         accent={ACCENT}
         title="When your back gives out, everything else does too."
