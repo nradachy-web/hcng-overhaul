@@ -5,7 +5,8 @@
  * office reads the PDF the way they read the paper.
  *
  * Nothing here is stored by the site. Answers live in the browser's
- * sessionStorage until the PDF is built, then they are cleared.
+ * sessionStorage until the PDF is built, then they are cleared. Option
+ * labels double as keys into formLayout.ts, so change them in both places.
  */
 
 export type FieldKind =
@@ -109,6 +110,31 @@ export const SYMPTOMS = [
   "Cancer",
   "Excessive menses",
   "Arthritis",
+  "Nervous depression",
+  "Rapid heart beat",
+  "Deafness",
+  "Pleurisy",
+  "Hot flashes",
+  "Bursitis",
+  "Colon trouble",
+  "Slow heart beat",
+  "Ear noise",
+  "Spitting",
+  "Irregular cycle",
+  "Foot trouble",
+  "Diarrhea",
+  "Anemia",
+  "Enlarged thyroid",
+  "Itching",
+  "Lumps in breast",
+  "Alcoholism",
+  "Diabetes",
+  "Glaucoma",
+  "Autoimmune disease",
+  "Mental disorder",
+  "Balance/coordination",
+  "Epilepsy",
+  "Polio",
 ];
 
 function complaint(n: 1 | 2): Section {
@@ -293,7 +319,12 @@ export const SECTIONS: Section[] = [
   {
     id: "symptoms",
     title: "Check any you have now or have had",
-    fields: [{ key: "symptoms", label: "Symptoms", kind: "checks", options: SYMPTOMS }],
+    fields: [
+      { key: "symptoms", label: "Symptoms", kind: "checks", options: SYMPTOMS },
+      { key: "family_doctor", label: "Family doctor", kind: "text", half: true },
+      { key: "send_report", label: "Would you like us to send them a report?", kind: "yesno", half: true },
+      { key: "payment_person", label: "Name of person responsible for payment", kind: "text" },
+    ],
   },
   {
     id: "acknowledgment",

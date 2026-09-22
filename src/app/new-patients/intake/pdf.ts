@@ -1,51 +1,31 @@
 /**
- * Renders the intake answers as a letter-size PDF in the order of the paper
- * form, entirely in the patient's browser (pdf-lib, standard fonts, no
- * network). Header and "Patient Confidential" footer match the Google Doc.
- * Checkbox groups print as [x] / [ ] lists so the office can scan them the
- * way they scan the paper.
+ * Fills Dr. Christine's own new patient form. The template is her Google
+ * Doc exported to PDF (public/assets/forms/hcng-new-patient-form.pdf);
+ * every answer is typed onto the blank it belongs to, checkboxes get an X,
+ * the circle-one letters (Sex, Marital) get a ring, and the symptom bullets
+ * get an X. Coordinates come from formLayout.ts. Text that will not fit its
+ * blank shrinks to 6.5pt; anything still too long is cut at the blank and
+ * printed in full on an addendum page so nothing the patient typed is lost.
+ * Runs entirely in the patient's browser with pdf-lib.
  */
 
 import { PDFDocument, PDFFont, PDFPage, StandardFonts, rgb } from "pdf-lib";
-import { SECTIONS, ageFromDob, visibleFields, type Answers, type Field } from "./fields";
+import { asset } from "@/lib/asset";
+import { SECTIONS, ageFromDob, visibleFields, type Answers } from "./fields";
+import { LAYOUT, type Multi, type Ring, type Spot, type Target } from "./formLayout";
 
+const INK = rgb(0.05, 0.1, 0.35);
 const PAGE_W = 612;
 const PAGE_H = 792;
-const MARGIN = 48;
-const CONTENT_W = PAGE_W - MARGIN * 2;
-const FOOT = 40;
 
-const INK = rgb(0.15, 0.13, 0.12);
-const MUTED = rgb(0.42, 0.38, 0.34);
-const RULE = rgb(0.75, 0.72, 0.68);
-
-type Ctx = {
-  doc: PDFDocument;
-  page: PDFPage;
-  y: number;
-  regular: PDFFont;
-  bold: PDFFont;
-  pageNo: number;
-  stamp: string;
-};
-
-function wrap(text: string, font: PDFFont, size: number, width: number): string[] {
-  const lines: string[] = [];
-  for (const para of String(text).split(/\r?\n/)) {
-    const words = para.split(/\s+/).filter(Boolean);
-    let line = "";
-    for (const w of words) {
-      const probe = line ? `${line} ${w}` : w;
-      if (font.widthOfTextAtSize(probe, size) <= width) {
-        line = probe;
-      } else {
-        if (line) lines.push(line);
-        line = w;
-      }
-    }
-    lines.push(line);
-  }
-  return lines.length ? lines : [""];
+function isSpot(t: Target): t is Spot {
+  return typeof (t as Spot).x === "number" && typeof (t as Spot).p === "number";
+}
+function isMulti(t: Target): t is Multi {
+  return Array.isArray((t as Multi).lines);
+}
+function isRing(t: Spot | Ring): t is Ring {
+  return typeof (t as Ring).cx === "number";
 }
 
 /** Date inputs give YYYY-MM-DD; the office reads MM/DD/YYYY. */
@@ -60,198 +40,144 @@ function clean(s: string): string {
     .replace(/[\u2018\u2019]/g, "'")
     .replace(/[\u201c\u201d]/g, '"')
     .replace(/\u2013|\u2014/g, "-")
-    .replace(/[^\x20-\x7e\xa0-\xff]/g, "?");
+    .replace(/\s+/g, " ")
+    .replace(/[^\x20-\x7e\xa0-\xff]/g, "?")
+    .trim();
 }
 
-function footer(ctx: Ctx) {
-  const t = clean(`2026/2027 Hanczaryk Chiropractic Neurology Group - Patient Confidential`);
-  ctx.page.drawText(t, { x: MARGIN, y: FOOT - 14, size: 8, font: ctx.regular, color: MUTED });
-  const p = `Page ${ctx.pageNo}`;
-  ctx.page.drawText(p, {
-    x: PAGE_W - MARGIN - ctx.regular.widthOfTextAtSize(p, 8),
-    y: FOOT - 14,
-    size: 8,
-    font: ctx.regular,
-    color: MUTED,
-  });
-}
+type Overflow = { label: string; text: string };
 
-function header(ctx: Ctx, first: boolean) {
-  const title = "Hanczaryk Chiropractic Neurology Group";
-  const sub = "8185 Holly Rd. Suite 14, Grand Blanc, Michigan 48439   |   810.584.7170";
-  ctx.page.drawText(title, {
-    x: MARGIN,
-    y: PAGE_H - MARGIN,
-    size: first ? 15 : 11,
-    font: ctx.bold,
-    color: INK,
-  });
-  ctx.page.drawText(sub, {
-    x: MARGIN,
-    y: PAGE_H - MARGIN - (first ? 18 : 14),
-    size: 8.5,
-    font: ctx.regular,
-    color: MUTED,
-  });
-  const label = first ? "New Patient Intake" : `New Patient Intake, continued`;
-  ctx.page.drawText(label, {
-    x: PAGE_W - MARGIN - ctx.regular.widthOfTextAtSize(label, 8.5),
-    y: PAGE_H - MARGIN - (first ? 18 : 14),
-    size: 8.5,
-    font: ctx.regular,
-    color: MUTED,
-  });
-  const ruleY = PAGE_H - MARGIN - (first ? 30 : 24);
-  ctx.page.drawLine({ start: { x: MARGIN, y: ruleY }, end: { x: PAGE_W - MARGIN, y: ruleY }, thickness: 0.6, color: RULE });
-  ctx.y = ruleY - 18;
-}
-
-function newPage(ctx: Ctx) {
-  footer(ctx);
-  ctx.page = ctx.doc.addPage([PAGE_W, PAGE_H]);
-  ctx.pageNo += 1;
-  header(ctx, false);
-}
-
-function ensure(ctx: Ctx, needed: number) {
-  if (ctx.y - needed < FOOT + 10) newPage(ctx);
-}
-
-function sectionTitle(ctx: Ctx, title: string) {
-  ensure(ctx, 34);
-  ctx.y -= 6;
-  ctx.page.drawText(clean(title.toUpperCase()), { x: MARGIN, y: ctx.y, size: 9, font: ctx.bold, color: INK });
-  ctx.y -= 5;
-  ctx.page.drawLine({ start: { x: MARGIN, y: ctx.y }, end: { x: PAGE_W - MARGIN, y: ctx.y }, thickness: 0.5, color: RULE });
-  ctx.y -= 14;
-}
-
-function paragraph(ctx: Ctx, text: string, size = 8.5) {
-  const lines = wrap(clean(text), ctx.regular, size, CONTENT_W);
-  ensure(ctx, lines.length * (size + 3) + 6);
-  for (const l of lines) {
-    ctx.page.drawText(l, { x: MARGIN, y: ctx.y, size, font: ctx.regular, color: MUTED });
-    ctx.y -= size + 3;
+function drawFit(page: PDFPage, font: PDFFont, spot: Spot, text: string, overflow: Overflow[], label: string): void {
+  const t = clean(text);
+  if (!t) return;
+  const width = spot.w ?? 200;
+  let size = 9;
+  while (size > 6.5 && font.widthOfTextAtSize(t, size) > width) size -= 0.5;
+  if (font.widthOfTextAtSize(t, size) <= width) {
+    page.drawText(t, { x: spot.x, y: spot.y, size, font, color: INK });
+    return;
   }
-  ctx.y -= 4;
+  // Cut at the blank, mark it, and carry the full text to the addendum.
+  let cut = t;
+  while (cut.length > 1 && font.widthOfTextAtSize(`${cut}... (see addendum)`, 6.5) > width) cut = cut.slice(0, -1);
+  page.drawText(`${cut.trimEnd()}... (see addendum)`, { x: spot.x, y: spot.y, size: 6.5, font, color: INK });
+  overflow.push({ label, text: t });
 }
 
-/** Label on one line, value beneath; two columns when both fields are half. */
-function valueRow(ctx: Ctx, fields: { field: Field; value: string }[]) {
-  const cols = fields.length;
-  const colW = (CONTENT_W - (cols - 1) * 14) / cols;
-  const labelSize = 7.5;
-  const valueSize = 10;
-  const wrapped = fields.map((f) => wrap(clean(f.value || " "), ctx.regular, valueSize, colW));
-  const tallest = Math.max(...wrapped.map((w) => w.length));
-  const rowH = labelSize + 4 + tallest * (valueSize + 3) + 8;
-  ensure(ctx, rowH);
-  fields.forEach((f, i) => {
-    const x = MARGIN + i * (colW + 14);
-    ctx.page.drawText(clean(f.field.label), { x, y: ctx.y, size: labelSize, font: ctx.regular, color: MUTED });
-    let y = ctx.y - labelSize - 4;
-    for (const l of wrapped[i]) {
-      ctx.page.drawText(l, { x, y: y - valueSize + 2, size: valueSize, font: ctx.bold, color: INK });
-      y -= valueSize + 3;
-    }
-    ctx.page.drawLine({ start: { x, y: y + 1 }, end: { x: x + colW, y: y + 1 }, thickness: 0.4, color: RULE });
-  });
-  ctx.y -= rowH;
-}
-
-/** A checkbox group: label, then [x]/[ ] items flowed across the width. */
-function checkRow(ctx: Ctx, field: Field, chosen: string[], perLine: number) {
+/** Flow one answer across several blank lines; leftovers go to the addendum. */
+function drawLines(doc: PDFDocument, font: PDFFont, target: Multi, text: string, overflow: Overflow[], label: string): void {
+  const t = clean(text);
+  if (!t) return;
   const size = 8.5;
-  const opts = field.options ?? [];
-  const lines = Math.ceil(opts.length / perLine);
-  ensure(ctx, 12 + lines * (size + 5) + 6);
-  ctx.page.drawText(clean(field.label), { x: MARGIN, y: ctx.y, size: 7.5, font: ctx.regular, color: MUTED });
-  ctx.y -= 12;
-  const colW = CONTENT_W / perLine;
-  opts.forEach((o, i) => {
-    const x = MARGIN + (i % perLine) * colW;
-    const on = chosen.includes(o);
-    ctx.page.drawText(`${on ? "[x]" : "[  ]"} ${clean(o)}`, {
-      x,
-      y: ctx.y,
-      size,
-      font: on ? ctx.bold : ctx.regular,
-      color: on ? INK : MUTED,
-    });
-    if ((i + 1) % perLine === 0 || i === opts.length - 1) ctx.y -= size + 5;
-  });
-  ctx.y -= 6;
+  const words = t.split(" ");
+  let i = 0;
+  for (const spot of target.lines) {
+    const width = spot.w ?? 200;
+    let line = "";
+    while (i < words.length) {
+      const probe = line ? `${line} ${words[i]}` : words[i];
+      if (font.widthOfTextAtSize(probe, size) > width) break;
+      line = probe;
+      i += 1;
+    }
+    if (!line && i < words.length) {
+      // A single word wider than the line: force it, then move on.
+      line = words[i];
+      i += 1;
+    }
+    if (line) doc.getPage(spot.p - 1).drawText(line, { x: spot.x, y: spot.y, size, font, color: INK });
+    if (i >= words.length) return;
+  }
+  overflow.push({ label, text: t });
+}
+
+function drawMark(page: PDFPage, bold: PDFFont, spot: Spot | Ring): void {
+  if (isRing(spot)) {
+    page.drawEllipse({ x: spot.cx, y: spot.cy, xScale: spot.rx, yScale: spot.ry, borderColor: INK, borderWidth: 1.1 });
+    return;
+  }
+  page.drawText("X", { x: spot.x, y: spot.y, size: 9, font: bold, color: INK });
 }
 
 export async function buildIntakePdf(a: Answers): Promise<Uint8Array> {
-  const doc = await PDFDocument.create();
-  doc.setTitle("New Patient Intake");
-  doc.setAuthor("Hanczaryk Chiropractic Neurology Group");
-  const regular = await doc.embedFont(StandardFonts.Helvetica);
+  const res = await fetch(asset("/assets/forms/hcng-new-patient-form.pdf"));
+  if (!res.ok) throw new Error("The form template could not be loaded.");
+  const doc = await PDFDocument.load(await res.arrayBuffer());
+  const font = await doc.embedFont(StandardFonts.Helvetica);
   const bold = await doc.embedFont(StandardFonts.HelveticaBold);
+  const pages = doc.getPages();
+  const at = (p: number) => pages[p - 1];
+  const overflow: Overflow[] = [];
   const stamp = new Date().toLocaleString("en-US", { timeZone: "America/Detroit" });
-  const ctx: Ctx = { doc, page: doc.addPage([PAGE_W, PAGE_H]), y: 0, regular, bold, pageNo: 1, stamp };
-  header(ctx, true);
-
-  // Identity strip the office reads first.
-  valueRow(ctx, [
-    { field: { key: "name", label: "Name", kind: "text" }, value: String(a.name ?? "") },
-    { field: { key: "dob", label: "Date of birth", kind: "text" }, value: usDate(String(a.dob ?? "")) },
-    { field: { key: "age", label: "Age", kind: "text" }, value: ageFromDob(String(a.dob ?? "")) },
-    { field: { key: "submitted", label: "Submitted", kind: "text" }, value: stamp },
-  ]);
 
   for (const section of SECTIONS) {
     if (section.when && !section.when(a)) continue;
-    const fields = visibleFields(section, a).filter((f) => f.key !== "name" && f.key !== "dob");
-    if (fields.length === 0) continue;
-    sectionTitle(ctx, section.title);
-    if (section.intro && section.id !== "about" && section.id !== "complaint-1" && section.id !== "complaint-2") {
-      paragraph(ctx, section.intro);
-    }
-    let pending: { field: Field; value: string }[] = [];
-    const flush = () => {
-      if (pending.length) valueRow(ctx, pending);
-      pending = [];
-    };
-    for (const f of fields) {
-      const raw = a[f.key];
-      if (f.kind === "checks") {
-        flush();
-        const chosen = Array.isArray(raw) ? raw : [];
-        const perLine = (f.options?.length ?? 0) > 12 ? 4 : 3;
-        checkRow(ctx, f, chosen, perLine);
-        continue;
-      }
-      const value = Array.isArray(raw)
-        ? raw.join(", ")
-        : f.kind === "date"
-          ? usDate(String(raw ?? ""))
-          : String(raw ?? "");
-      if (f.kind === "textarea") {
-        flush();
-        valueRow(ctx, [{ field: f, value }]);
-        continue;
-      }
-      if (f.half) {
-        pending.push({ field: f, value });
-        if (pending.length === 2) flush();
+    for (const field of visibleFields(section, a)) {
+      const target = LAYOUT[field.key];
+      const raw = a[field.key];
+      if (!target || raw === undefined || raw === "") continue;
+      if (isMulti(target)) {
+        drawLines(doc, font, target, String(raw), overflow, field.label);
+      } else if (isSpot(target)) {
+        const text =
+          field.kind === "date" ? usDate(String(raw)) : field.key.endsWith("_scale") ? `${String(raw)} / 10` : String(raw);
+        drawFit(at(target.p), font, target, text, overflow, field.label);
       } else {
-        flush();
-        valueRow(ctx, [{ field: f, value }]);
+        const chosen = Array.isArray(raw) ? raw : [String(raw)];
+        for (const c of chosen) {
+          const spot = target[c];
+          if (spot) drawMark(at(spot.p), bold, spot);
+        }
       }
     }
-    flush();
   }
 
-  ctx.y -= 10;
-  ensure(ctx, 30);
-  paragraph(
-    ctx,
-    `Signed electronically by ${String(a.signature ?? "")} on ${usDate(String(a.signature_date ?? ""))} from the patient's own device, submitted ${stamp}.`,
-    8,
-  );
-  footer(ctx);
+  // The paper form's own "Date:" and "Age:" blanks, which the patient does not type.
+  const dateSpot = LAYOUT.date;
+  if (isSpot(dateSpot)) {
+    drawFit(at(dateSpot.p), font, dateSpot, new Date().toLocaleDateString("en-US", { timeZone: "America/Detroit" }), overflow, "Date");
+  }
+  const ageSpot = LAYOUT.age;
+  if (isSpot(ageSpot)) drawFit(at(ageSpot.p), font, ageSpot, ageFromDob(String(a.dob ?? "")), overflow, "Age");
+
+  // Provenance line under the signature, in the office-use gap.
+  at(5).drawText(clean(`Signed electronically by ${String(a.signature ?? "")} from the patient's own device, submitted ${stamp}.`), {
+    x: 36,
+    y: PAGE_H - 128,
+    size: 7.5,
+    font,
+    color: INK,
+  });
+
+  if (overflow.length) {
+    const page = doc.addPage([PAGE_W, PAGE_H]);
+    let y = PAGE_H - 60;
+    page.drawText("New Patient Intake, addendum", { x: 48, y, size: 13, font: bold, color: INK });
+    y -= 16;
+    page.drawText(clean(`${String(a.name ?? "")}: answers that did not fit their blank on the form.`), { x: 48, y, size: 9, font, color: INK });
+    y -= 24;
+    for (const item of overflow) {
+      page.drawText(clean(item.label), { x: 48, y, size: 8, font: bold, color: INK });
+      y -= 12;
+      let line = "";
+      for (const w of item.text.split(" ")) {
+        const probe = line ? `${line} ${w}` : w;
+        if (font.widthOfTextAtSize(probe, 9.5) > PAGE_W - 96) {
+          page.drawText(line, { x: 48, y, size: 9.5, font, color: INK });
+          y -= 13;
+          line = w;
+        } else line = probe;
+      }
+      if (line) {
+        page.drawText(line, { x: 48, y, size: 9.5, font, color: INK });
+        y -= 13;
+      }
+      y -= 8;
+    }
+    page.drawText("2026/2027 Hanczaryk Chiropractic Neurology Group - Patient Confidential", { x: 48, y: 40, size: 8, font, color: INK });
+  }
+
+  doc.setTitle(`New Patient Intake, ${clean(String(a.name ?? ""))}`);
   return doc.save();
 }
 
