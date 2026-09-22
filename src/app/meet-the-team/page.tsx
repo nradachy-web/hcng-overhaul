@@ -14,12 +14,13 @@ import { CuratedGallery, type GalleryPhoto } from "@/components/CuratedGallery";
 const TEAM_PHOTOS: GalleryPhoto[] = [
   { src: "/assets/images/sep26/team-four-window.jpg", alt: "The four of them by the front window, Dr. Christine in the patterned chair", caption: "The team", aspect: "aspect-[3/4]" },
   { src: "/assets/images/sep26/team-kelli-christine-laugh.jpg", alt: "Kelli and Dr. Christine laughing together on the sofa", caption: "Kelli and Dr. Christine", aspect: "aspect-[3/4]" },
-  { src: "/assets/images/sep26/team-three-bw.jpg", alt: "Three of the team in black and white in front of the brass mirror", caption: "The reception room", aspect: "aspect-[3/4]", objectPosition: "50% 40%" },
   { src: "/assets/images/sep26/team-three-window.jpg", alt: "Three of the team by the front window", caption: "By the window", aspect: "aspect-[3/4]" },
   { src: "/assets/images/sep26/team-kelli-christine-mirror.jpg", alt: "Kelli and Dr. Christine seated under the brass sunburst mirror", caption: "Under the mirror", aspect: "aspect-[3/4]" },
   { src: "/assets/images/sep26/team-christine-kelli-sofa.jpg", alt: "Dr. Christine and Kelli on the black leather sofa", caption: "The sofa", aspect: "aspect-[3/4]" },
-  { src: "/assets/images/sep26/team-four-sofa.jpg", alt: "The whole team seated on the sofa under the brass mirror", caption: "All four", aspect: "aspect-[3/4]", objectPosition: "50% 45%" },
   { src: "/assets/images/sep26/team-kelli-christine-mirror-2.jpg", alt: "Kelli and Dr. Christine in front of the mirror", caption: "Kelli and Dr. Christine", aspect: "aspect-[3/4]" },
+  /* Landscape group shots: nobody gets cropped out, so lightbox only. */
+  { src: "/assets/images/sep26/team-three-bw.jpg", alt: "Three of the team in black and white in front of the brass mirror", caption: "The reception room" },
+  { src: "/assets/images/sep26/team-four-sofa.jpg", alt: "The whole team seated on the sofa under the brass mirror", caption: "All four" },
 ];
 
 /**
@@ -326,8 +327,9 @@ export default function MeetTheTeamPage() {
         </Reveal>
         <CuratedGallery
           photos={TEAM_PHOTOS}
-          visibleCount={8}
-          gridClassName="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-4"
+          visibleCount={6}
+          gridClassName="mt-10 grid gap-5 grid-cols-2 lg:grid-cols-3"
+          viewAllLabel="View all 8 photos"
         />
       </Band>
 

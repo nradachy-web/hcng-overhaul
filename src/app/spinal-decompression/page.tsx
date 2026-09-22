@@ -219,8 +219,8 @@ export default function SpinalDecompressionPage() {
       <PhotoHero
         image="/assets/images/sep26/decompression-hero-console.jpg"
         imageAlt="Dr. Christine Hanczaryk at the Hill DT console, a patient lying on the decompression table behind her"
-        objectPosition="50% 30%"
-        imgClassName="lg:left-[44%] lg:[mask-image:linear-gradient(90deg,transparent,black_28%)]"
+        objectPosition="50% 35%"
+        imgClassName="lg:left-auto lg:w-[min(42%,640px)] lg:[mask-image:linear-gradient(90deg,transparent,black_30%)]"
         eyebrow="Non-surgical spinal decompression, Hill DT"
         accent={ACCENT}
         title="A herniated disc does not have to mean surgery."

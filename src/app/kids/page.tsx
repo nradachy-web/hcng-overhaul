@@ -216,8 +216,8 @@ export default function KidsPage() {
       <PhotoHero
         image="/assets/images/sep26/kids-hero-baby-green.jpg"
         imageAlt="Dr. Christine Hanczaryk gently checking a baby on a dinosaur blanket in the green kids room"
-        objectPosition="50% 35%"
-        imgClassName="lg:left-[44%] lg:[mask-image:linear-gradient(90deg,transparent,black_28%)]"
+        objectPosition="50% 40%"
+        imgClassName="lg:left-auto lg:w-[min(42%,640px)] lg:[mask-image:linear-gradient(90deg,transparent,black_30%)]"
         textMaxW="max-w-xl"
         eyebrow="Chiropractic and kids"
         accent={ACCENT}

@@ -60,13 +60,13 @@ export function Header() {
   }, [moreOpen]);
 
   const linkClass =
-    "text-mono-label px-3 py-2 text-paper-50/80 transition-colors duration-150 hover:text-paper-50 xl:px-2 xl:text-[12px]";
+    "text-mono-label px-3 py-2 whitespace-nowrap text-paper-50/80 transition-colors duration-150 hover:text-paper-50 xl:px-2 xl:text-[12px]";
 
   return (
     <header className="band-charcoal sticky top-0 z-50 border-b border-(--hairline) bg-charcoal-850">
       <div
         className={cn(
-          "container-site flex items-center justify-between gap-3 transition-[height] duration-200",
+          "container-site flex items-center justify-between gap-3 transition-[height] duration-200 xl:max-w-[1440px]",
           compressed ? "h-[60px]" : "h-[76px]",
         )}
       >
@@ -141,7 +141,7 @@ export function Header() {
           <a
             href={PHONE_TEL}
             onClick={() => track(EV.TEL_CLICK, { location: "header" })}
-            className="text-mono-label flex items-center gap-2.5 rounded-full border border-brass-300/40 py-2 pr-4 pl-3.5 text-paper-50 transition-colors duration-150 hover:border-brass-300/70"
+            className="text-mono-label flex items-center gap-2.5 rounded-full border border-brass-300/40 py-2 pr-4 pl-3.5 whitespace-nowrap text-paper-50 transition-colors duration-150 hover:border-brass-300/70"
           >
             <OpenNowDot open={open} />
             <span

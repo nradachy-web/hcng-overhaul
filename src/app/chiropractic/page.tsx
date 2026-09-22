@@ -335,13 +335,14 @@ export default function ChiropracticPage() {
   return (
     <>
       {/* Hero photo picked by Dr. Christine (2026-09-21): the hex wall
-          adjustment. Portrait source, so on lg it rides the right half,
-          masked into the band; below lg it is full-bleed under the scrim. */}
+          adjustment. Portrait source, so on lg it rides a capped column at
+          the right, masked into the band, tall enough that her face and her
+          hands on the patient both show; below lg it is full-bleed. */}
       <PhotoHero
         image="/assets/images/gallery05/41564038.jpg"
         imageAlt="Dr. Christine Hanczaryk, laughing under a green Malibu cap, adjusting a patient in front of the brass hex wall"
-        objectPosition="50% 0%"
-        imgClassName="lg:left-[44%] lg:[mask-image:linear-gradient(90deg,transparent,black_28%)]"
+        objectPosition="50% 35%"
+        imgClassName="lg:left-auto lg:w-[min(42%,640px)] lg:[mask-image:linear-gradient(90deg,transparent,black_30%)]"
         eyebrow="Chiropractic care"
         accent={ACCENT}
         title="When your back gives out, everything else does too."
