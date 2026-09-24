@@ -144,6 +144,18 @@ export function Footer() {
             ))}
           </ul>
         </div>
+
+        {/* Agency credit: the standard line on every Modern Apex client site. */}
+        <p className="text-mono-cap mt-6 text-paper-50/50">
+          <a
+            href="https://modernapexstrategies.com"
+            target="_blank"
+            rel="noopener"
+            className={`${link} text-paper-50/50`}
+          >
+            Website &amp; marketing by Modern Apex Strategies
+          </a>
+        </p>
       </div>
     </footer>
   );
