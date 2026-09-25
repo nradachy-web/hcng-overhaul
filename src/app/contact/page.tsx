@@ -137,7 +137,10 @@ export default function ContactPage() {
             </Reveal>
             {/* Hidden until a real Web3Forms key is set: a placeholder key
                 would fail every submission. JotForm, tel, and mailto carry
-                contact until then. */}
+                contact until then. HIPAA: turning this on puts patient-typed
+                fields in this page next to the Google tag. Before setting a
+                key, move the form to its own route listed in
+                lib/patientData.ts (no trackers there). */}
             {!WEB3FORMS_ACCESS_KEY.includes("PLACEHOLDER") && (
               <Reveal delay={0.14} className="mt-6">
                 <Web3FormsFallback />
