@@ -1,11 +1,9 @@
 import type { Metadata, Viewport } from "next";
-import Script from "next/script";
 import { IBM_Plex_Mono, Poiret_One, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { asset } from "@/lib/asset";
 import {
   EMAIL,
-  GA4_ID,
   HOURS_BY_WEEKDAY,
   SITE_DESCRIPTION,
   SITE_NAME,
@@ -15,6 +13,7 @@ import {
 } from "@/lib/constants";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
+import { Trackers } from "@/components/Trackers";
 
 const poiret = Poiret_One({
   weight: "400",
@@ -134,23 +133,9 @@ export default function RootLayout({
         <Header />
         <main id="main">{children}</main>
         <Footer />
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="ga4" strategy="afterInteractive">
-          {`window.dataLayer = window.dataLayer || [];
-function gtag(){dataLayer.push(arguments);}
-gtag('js', new Date());
-gtag('config', '${GA4_ID}');`}
-        </Script>
-        {/* CallRail session DNI (company COM01a0d7b896307d5794528cb5b6541e91,
-            Nick's, 2026-09-25): swaps the displayed 810.584.7170 for a
-            visitor-specific pool number so calls attribute per session. */}
-        <Script
-          src="https://cdn.callrail.com/companies/436841320/6c77a6d8d3fd687731ba/12/swap.js"
-          strategy="afterInteractive"
-        />
+        {/* Google tag + CallRail DNI. Loaded only in page loads that start
+            outside patient-data routes (HIPAA; see components/Trackers.tsx). */}
+        <Trackers />
       </body>
     </html>
   );

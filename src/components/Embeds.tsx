@@ -11,7 +11,7 @@
 import { useEffect, useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { asset } from "@/lib/asset";
-import { track } from "@/lib/track";
+import { track, trackAppointmentRequest } from "@/lib/track";
 import {
   ADDRESS_LINE_1,
   ADDRESS_LINE_2,
@@ -114,6 +114,16 @@ export function JotFormShell({
   const { ref, near } = useApproach<HTMLDivElement>();
   const fired = useRef(false);
   const [loaded, setLoaded] = useState(false);
+  // The iframe's first load is the form. JotForm validates in the browser and
+  // posts the whole page on send, so a second load is its thank-you page:
+  // count one appointment request, once per page view. Nothing a patient typed
+  // leaves this frame; the event carries the form name only.
+  const loads = useRef(0);
+  const onFrameLoad = () => {
+    loads.current += 1;
+    setLoaded(true);
+    if (loads.current === 2) trackAppointmentRequest(form);
+  };
 
   useEffect(() => {
     if (near && !fired.current) {
@@ -148,7 +158,7 @@ export function JotFormShell({
             <iframe
               src={`https://form.jotform.com/${formId}`}
               title={heading}
-              onLoad={() => setLoaded(true)}
+              onLoad={onFrameLoad}
               className={cn(
                 "relative w-full rounded-[2px] border-0 transition-opacity duration-300",
                 loaded ? "opacity-100" : "opacity-0",

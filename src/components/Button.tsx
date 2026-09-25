@@ -10,8 +10,10 @@
 import Link from "next/link";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { asset } from "@/lib/asset";
 import { track } from "@/lib/track";
 import { EV, PHONE_DISPLAY, PHONE_TEL, type TelLocation } from "@/lib/constants";
+import { isPatientDataPath } from "@/lib/patientData";
 
 type TrackSpec = { event: string; params?: Record<string, string> };
 
@@ -65,7 +67,9 @@ export function Button({
     </>
   );
 
-  if (href && href.startsWith("/")) {
+  // Patient-data routes (the intake) get a plain anchor: a full page load, so
+  // no Google tag from this page can come along (lib/patientData.ts).
+  if (href && href.startsWith("/") && !isPatientDataPath(href.split(/[?#]/)[0])) {
     return (
       <Link href={href} className={classes} onClick={handleClick}>
         {inner}
@@ -75,7 +79,7 @@ export function Button({
   if (href) {
     return (
       <a
-        href={href}
+        href={href.startsWith("/") ? asset(href) : href}
         className={classes}
         onClick={handleClick}
         {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}

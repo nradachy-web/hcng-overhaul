@@ -106,6 +106,22 @@ export const JOTFORM_CONSULT_ID = "240735375352053";
 export const TYPEFORM_QUIZ_ID = "01HQXGR4GR4PC36HBJXVJ4DWJG";
 export const REVIEWWAVE_ID = "9691e662011613264022a6e80226b2de6b53";
 export const GA4_ID = "G-GKMRPF0LE3";
+/** Google Ads account 591-137-9184; its destination rides inside the GA4 Google tag. */
+export const ADS_ID = "AW-16508184554";
+/**
+ * Google Ads conversion action 7794747503 "Appointment request sent (website
+ * form)", created 2026-09-25. Fires when a JotForm request finishes sending
+ * (see JotFormShell). Event only: no form values, no user data. Never fire it
+ * from the patient intake.
+ */
+export const ADS_APPOINTMENT_REQUEST_SEND_TO = "AW-16508184554/U8ZnCO_Q6YQdEOrP2789";
+/**
+ * CallRail session DNI (company COM01a0d7b896307d5794528cb5b6541e91, Nick's,
+ * 2026-09-25): swaps the displayed 810.584.7170 for a tracking number for
+ * Google search visitors. Loaded by Trackers.tsx, never on patient-data routes.
+ */
+export const CALLRAIL_SWAP_SRC =
+  "https://cdn.callrail.com/companies/436841320/6c77a6d8d3fd687731ba/12/swap.js";
 
 /** Web3Forms fallback form on /contact/: Nick supplies the real key later. */
 export const WEB3FORMS_ACCESS_KEY = "WEB3FORMS_ACCESS_KEY_PLACEHOLDER";
@@ -169,10 +185,13 @@ export const NAV_LEGAL: NavItem[] = [
 
 /* ---------------------------------------------------------------- */
 /* GA4 event names (DESIGN_DIRECTION 7.5). The only tracking id is   */
-/* G-GKMRPF0LE3; these are the only events.                          */
+/* G-GKMRPF0LE3; these are the only events. None of them carries     */
+/* form values or anything a patient typed.                          */
 /* ---------------------------------------------------------------- */
 
 export const EV = {
+  /** A JotForm appointment/consult request finished sending (2026-09-25). */
+  APPOINTMENT_REQUEST: "appointment_request",
   TEL_CLICK: "tel_click",
   BOOK_CLICK: "book_click",
   FORM_OPEN: "form_open",
