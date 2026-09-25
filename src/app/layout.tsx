@@ -144,6 +144,14 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', '${GA4_ID}');`}
         </Script>
+        {/* CallRail session DNI (company COM01a0d782560370839e0cedfb47cf3d45,
+            created 2026-09-25): swaps the displayed 810.584.7170 for a
+            visitor-specific pool number so calls attribute per session.
+            Inert until the Website pool tracker exists in CallRail. */}
+        <Script
+          src="https://cdn.callrail.com/companies/973911136/66065b36356166eb8c78/12/swap.js"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );
