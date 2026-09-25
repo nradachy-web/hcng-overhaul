@@ -15,6 +15,9 @@ export const metadata: Metadata = {
   description: "Fill out your new patient forms online before your first visit at Hanczaryk Chiropractic Neurology Group.",
   robots: { index: false, follow: false },
   alternates: { canonical: "/new-patients/intake/" },
+  // The next page's Google tag reads document.referrer; send the origin only,
+  // so no tracker learns this visit came from the patient intake.
+  referrer: "strict-origin",
 };
 
 export default function IntakePage() {
