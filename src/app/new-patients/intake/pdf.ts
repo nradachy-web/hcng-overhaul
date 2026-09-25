@@ -11,8 +11,9 @@
 
 import { PDFDocument, PDFFont, PDFPage, StandardFonts, rgb } from "pdf-lib";
 import { asset } from "@/lib/asset";
+import { NEW_PATIENT_FORMS_URL } from "@/lib/constants";
 import { SECTIONS, ageFromDob, visibleFields, type Answers } from "./fields";
-import { LAYOUT, type Multi, type Ring, type Spot, type Target } from "./formLayout";
+import { LAYOUT, SIGNATURE_NOTE, type Multi, type Ring, type Spot, type Target } from "./formLayout";
 
 const INK = rgb(0.05, 0.1, 0.35);
 const PAGE_W = 612;
@@ -100,9 +101,10 @@ function drawMark(page: PDFPage, bold: PDFFont, spot: Spot | Ring): void {
 }
 
 export async function buildIntakePdf(a: Answers): Promise<Uint8Array> {
-  const res = await fetch(asset("/assets/forms/hcng-new-patient-form.pdf"));
+  const res = await fetch(asset(NEW_PATIENT_FORMS_URL));
   if (!res.ok) throw new Error("The form template could not be loaded.");
   const doc = await PDFDocument.load(await res.arrayBuffer());
+  if (doc.getPageCount() !== 4) throw new Error("The intake template has changed. Please refresh the page and try again.");
   const font = await doc.embedFont(StandardFonts.Helvetica);
   const bold = await doc.embedFont(StandardFonts.HelveticaBold);
   const pages = doc.getPages();
@@ -141,13 +143,9 @@ export async function buildIntakePdf(a: Answers): Promise<Uint8Array> {
   if (isSpot(ageSpot)) drawFit(at(ageSpot.p), font, ageSpot, ageFromDob(String(a.dob ?? "")), overflow, "Age");
 
   // Provenance line under the signature, in the office-use gap.
-  at(5).drawText(clean(`Signed electronically by ${String(a.signature ?? "")} from the patient's own device, submitted ${stamp}.`), {
-    x: 36,
-    y: PAGE_H - 128,
-    size: 7.5,
-    font,
-    color: INK,
-  });
+  drawFit(at(SIGNATURE_NOTE.p), font, SIGNATURE_NOTE,
+    `Signed electronically by ${String(a.signature ?? "")} from the patient's own device, submitted ${stamp}.`,
+    overflow, "Electronic signature record");
 
   if (overflow.length) {
     const page = doc.addPage([PAGE_W, PAGE_H]);

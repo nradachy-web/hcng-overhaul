@@ -121,9 +121,9 @@ export const YOUTUBE_TESTIMONIALS = [
 
 export const YOUTUBE_NSSD = "stb-zBsdS5E";
 
-/** New patient forms Google Doc (labeled honestly until Nick ships a PDF). */
+/** The same versioned, four-page template used by the online intake. */
 export const NEW_PATIENT_FORMS_URL =
-  "https://docs.google.com/document/d/158Ly9Dg3JtQ0_RorZ-_bUyTCQ9IYIYfnp_NjSW2ogb4/edit?usp=sharing";
+  "/assets/forms/hcng-new-patient-form.pdf?v=20260924";
 
 /* ---------------------------------------------------------------- */
 /* Navigation                                                        */

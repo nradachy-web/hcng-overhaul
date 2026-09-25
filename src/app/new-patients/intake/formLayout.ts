@@ -1,15 +1,16 @@
 /**
- * Where each answer lands on Dr. Christine's own form. Generated 2026-09-22
- * from public/assets/forms/hcng-new-patient-form.pdf (her Google Doc exported
- * to PDF) by reading the underscore blanks, checkbox glyphs, and bullets with
- * their coordinates. y is PDF space (from the bottom of a 612 x 792 page).
- * If the template is re-exported, regenerate this file; do not hand-edit.
+ * Answer positions on the four-page HCNG intake. PDF space is measured
+ * from the bottom of a 612 x 792 page. Generated with the template by
+ * scripts/repair-intake-layout.py from the original September 22 export.
+ * Regenerate the PDF and this map together; do not move fields by hand.
  */
 
 export type Spot = { p: number; x: number; y: number; w?: number };
 export type Ring = { p: number; cx: number; cy: number; rx: number; ry: number };
 export type Multi = { lines: Spot[] };
 export type Target = Spot | Multi | Record<string, Spot | Ring>;
+
+export const SIGNATURE_NOTE: Spot = {"p": 4, "x": 36, "y": 81.87, "w": 540};
 
 export const LAYOUT: Record<string, Target> = {
  "name": {
@@ -988,48 +989,48 @@ export const LAYOUT: Record<string, Target> = {
   "Diabetes": {
    "p": 4,
    "x": 37.6,
-   "y": 623.7
+   "y": 667.7
   },
   "Neurological disorders": {
    "p": 4,
    "x": 90.7,
-   "y": 623.7
+   "y": 667.7
   },
   "Depression / mental illness": {
    "p": 4,
    "x": 202.9,
-   "y": 623.7
+   "y": 667.7
   },
   "Cancer": {
    "p": 4,
    "x": 332.0,
-   "y": 623.7
+   "y": 667.7
   },
   "Heart disease": {
    "p": 4,
    "x": 37.6,
-   "y": 610.7
+   "y": 654.7
   },
   "Autoimmune disorders": {
    "p": 4,
    "x": 112.3,
-   "y": 610.7
+   "y": 654.7
   },
   "Stroke": {
    "p": 4,
    "x": 226.8,
-   "y": 610.7
+   "y": 654.7
   },
   "Other": {
    "p": 4,
    "x": 269.6,
-   "y": 610.7
+   "y": 654.7
   }
  },
  "family_other": {
   "p": 4,
   "x": 310.7,
-  "y": 609.4,
+  "y": 653.4,
   "w": 59.8
  },
  "medications": {
@@ -1037,13 +1038,13 @@ export const LAYOUT: Record<string, Target> = {
    {
     "p": 4,
     "x": 380.0,
-    "y": 596.5,
+    "y": 640.5,
     "w": 190.5
    },
    {
     "p": 4,
     "x": 38.0,
-    "y": 583.7,
+    "y": 627.7,
     "w": 446.7
    }
   ]
@@ -1052,52 +1053,52 @@ export const LAYOUT: Record<string, Target> = {
   "Yes": {
    "p": 4,
    "x": 325.7,
-   "y": 570.6
+   "y": 614.6
   },
   "No": {
    "p": 4,
    "x": 373.5,
-   "y": 570.6
+   "y": 614.6
   }
  },
  "vitamins_need": {
   "Yes": {
    "p": 4,
    "x": 307.8,
-   "y": 557.8
+   "y": 601.8
   },
   "No": {
    "p": 4,
    "x": 355.6,
-   "y": 557.8
+   "y": 601.8
   }
  },
  "inner_soles": {
   "Yes": {
    "p": 4,
    "cx": 298.5,
-   "cy": 548.0,
+   "cy": 592.0,
    "rx": 12.0,
    "ry": 6.5
   },
   "No": {
    "p": 4,
    "x": 325.1,
-   "y": 545.0
+   "y": 589.0
   }
  },
  "heel_lifts": {
   "Yes": {
    "p": 4,
    "cx": 386.5,
-   "cy": 548.0,
+   "cy": 592.0,
    "rx": 10.5,
    "ry": 6.5
   },
   "No": {
    "p": 4,
    "cx": 409.5,
-   "cy": 548.0,
+   "cy": 592.0,
    "rx": 8.5,
    "ry": 6.5
   }
@@ -1106,578 +1107,578 @@ export const LAYOUT: Record<string, Target> = {
   "Yes": {
    "p": 4,
    "x": 108.2,
-   "y": 532.2
+   "y": 576.2
   },
   "No": {
    "p": 4,
    "x": 156.0,
-   "y": 532.2
+   "y": 576.2
   }
  },
  "arch_supports": {
   "Yes": {
    "p": 4,
    "x": 271.9,
-   "y": 532.2
+   "y": 576.2
   },
   "No": {
    "p": 4,
    "x": 314.4,
-   "y": 532.2
+   "y": 576.2
   }
  },
  "habit_alcohol": {
   "Heavy": {
    "p": 4,
    "x": 109.6,
-   "y": 508.1
+   "y": 552.1
   },
   "Moderate": {
    "p": 4,
    "x": 145.6,
-   "y": 508.1
+   "y": 552.1
   },
   "Light": {
    "p": 4,
    "x": 181.6,
-   "y": 508.1
+   "y": 552.1
   },
   "None": {
    "p": 4,
    "x": 217.6,
-   "y": 508.1
+   "y": 552.1
   }
  },
  "habit_exercise": {
   "Heavy": {
    "p": 4,
    "x": 328.7,
-   "y": 508.1
+   "y": 552.1
   },
   "Moderate": {
    "p": 4,
    "x": 361.6,
-   "y": 508.1
+   "y": 552.1
   },
   "Light": {
    "p": 4,
    "x": 397.6,
-   "y": 508.1
+   "y": 552.1
   },
   "None": {
    "p": 4,
    "x": 433.6,
-   "y": 508.1
+   "y": 552.1
   }
  },
  "habit_coffee": {
   "Heavy": {
    "p": 4,
    "x": 109.6,
-   "y": 495.2
+   "y": 539.2
   },
   "Moderate": {
    "p": 4,
    "x": 145.6,
-   "y": 495.2
+   "y": 539.2
   },
   "Light": {
    "p": 4,
    "x": 181.6,
-   "y": 495.2
+   "y": 539.2
   },
   "None": {
    "p": 4,
    "x": 217.6,
-   "y": 495.2
+   "y": 539.2
   }
  },
  "habit_sleep": {
   "Heavy": {
    "p": 4,
    "x": 328.0,
-   "y": 495.2
+   "y": 539.2
   },
   "Moderate": {
    "p": 4,
    "x": 361.6,
-   "y": 495.2
+   "y": 539.2
   },
   "Light": {
    "p": 4,
    "x": 397.6,
-   "y": 495.2
+   "y": 539.2
   },
   "None": {
    "p": 4,
    "x": 433.6,
-   "y": 495.2
+   "y": 539.2
   }
  },
  "habit_tobacco": {
   "Heavy": {
    "p": 4,
    "x": 109.6,
-   "y": 482.3
+   "y": 526.3
   },
   "Moderate": {
    "p": 4,
    "x": 145.6,
-   "y": 482.3
+   "y": 526.3
   },
   "Light": {
    "p": 4,
    "x": 181.6,
-   "y": 482.3
+   "y": 526.3
   },
   "None": {
    "p": 4,
    "x": 217.6,
-   "y": 482.3
+   "y": 526.3
   }
  },
  "habit_appetite": {
   "Heavy": {
    "p": 4,
    "x": 328.8,
-   "y": 482.3
+   "y": 526.3
   },
   "Moderate": {
    "p": 4,
    "x": 361.6,
-   "y": 482.3
+   "y": 526.3
   },
   "Light": {
    "p": 4,
    "x": 397.6,
-   "y": 482.3
+   "y": 526.3
   },
   "None": {
    "p": 4,
    "x": 433.6,
-   "y": 482.3
+   "y": 526.3
   }
  },
  "habit_cannabis": {
   "Heavy": {
    "p": 4,
    "x": 109.6,
-   "y": 469.4
+   "y": 513.4
   },
   "Moderate": {
    "p": 4,
    "x": 145.6,
-   "y": 469.4
+   "y": 513.4
   },
   "Light": {
    "p": 4,
    "x": 181.6,
-   "y": 469.4
+   "y": 513.4
   },
   "None": {
    "p": 4,
    "x": 217.6,
-   "y": 469.4
+   "y": 513.4
   }
  },
  "habit_drugs": {
   "Heavy": {
    "p": 4,
    "x": 109.6,
-   "y": 456.5
+   "y": 500.5
   },
   "Moderate": {
    "p": 4,
    "x": 145.6,
-   "y": 456.5
+   "y": 500.5
   },
   "Light": {
    "p": 4,
    "x": 181.6,
-   "y": 456.5
+   "y": 500.5
   },
   "None": {
    "p": 4,
    "x": 217.6,
-   "y": 456.5
+   "y": 500.5
   }
  },
  "symptoms": {
   "Low blood pressure": {
    "p": 4,
    "x": 58.6,
-   "y": 433.3
+   "y": 477.3
   },
   "Low back pain": {
    "p": 4,
    "x": 153.2,
-   "y": 433.3
+   "y": 477.3
   },
   "Difficulty digestion": {
    "p": 4,
    "x": 238.7,
-   "y": 433.3
+   "y": 477.3
   },
   "Stroke": {
    "p": 4,
    "x": 322.6,
-   "y": 433.3
+   "y": 477.3
   },
   "Eye pain": {
    "p": 4,
    "x": 406.6,
-   "y": 433.3
+   "y": 477.3
   },
   "Varicose veins": {
    "p": 4,
    "x": 489.1,
-   "y": 433.3
+   "y": 477.3
   },
   "High blood pressure": {
    "p": 4,
    "x": 58.6,
-   "y": 406.9
+   "y": 459.34
   },
   "Sciatica": {
    "p": 4,
    "x": 153.2,
-   "y": 406.9
+   "y": 459.34
   },
   "Hemorrhoids": {
    "p": 4,
    "x": 238.7,
-   "y": 406.9
+   "y": 459.34
   },
   "Chest pain": {
    "p": 4,
    "x": 322.6,
-   "y": 406.9
+   "y": 459.34
   },
   "Failing vision": {
    "p": 4,
    "x": 406.6,
-   "y": 406.9
+   "y": 459.34
   },
   "Bed wetting": {
    "p": 4,
    "x": 489.1,
-   "y": 406.9
+   "y": 459.34
   },
   "Allergy": {
    "p": 4,
    "x": 58.6,
-   "y": 380.4
+   "y": 441.29
   },
   "Neck pain/stiffness": {
    "p": 4,
    "x": 153.2,
-   "y": 380.4
+   "y": 441.29
   },
   "Nausea": {
    "p": 4,
    "x": 238.7,
-   "y": 380.4
+   "y": 441.29
   },
   "Difficulty breathing": {
    "p": 4,
    "x": 322.6,
-   "y": 380.4
+   "y": 441.29
   },
   "Tuberculosis": {
    "p": 4,
    "x": 406.6,
-   "y": 380.4
+   "y": 441.29
   },
   "Frequent urination": {
    "p": 4,
    "x": 489.1,
-   "y": 380.4
+   "y": 441.29
   },
   "Headache": {
    "p": 4,
    "x": 58.6,
-   "y": 354.0
+   "y": 423.33
   },
   "Poor posture": {
    "p": 4,
    "x": 153.2,
-   "y": 354.0
+   "y": 423.33
   },
   "Dizziness": {
    "p": 4,
    "x": 238.7,
-   "y": 354.0
+   "y": 423.33
   },
   "Swelling of ankles": {
    "p": 4,
    "x": 322.6,
-   "y": 354.0
+   "y": 423.33
   },
   "Bruise easily": {
    "p": 4,
    "x": 406.6,
-   "y": 354.0
+   "y": 423.33
   },
   "Kidney infection/stone": {
    "p": 4,
    "x": 489.1,
-   "y": 354.0
+   "y": 423.33
   },
   "Loss of sleep": {
    "p": 4,
    "x": 58.6,
-   "y": 327.5
+   "y": 405.27
   },
   "Spinal curvatures": {
    "p": 4,
    "x": 153.2,
-   "y": 327.5
+   "y": 405.27
   },
   "Fatigue": {
    "p": 4,
    "x": 238.7,
-   "y": 327.5
+   "y": 405.27
   },
   "Sinus infection": {
    "p": 4,
    "x": 322.6,
-   "y": 327.5
+   "y": 405.27
   },
   "Hay fever": {
    "p": 4,
    "x": 406.6,
-   "y": 327.5
+   "y": 405.27
   },
   "Prostate trouble": {
    "p": 4,
    "x": 489.1,
-   "y": 327.5
+   "y": 405.27
   },
   "Ulcers": {
    "p": 4,
    "x": 58.6,
-   "y": 301.1
+   "y": 387.31
   },
   "Swollen joints": {
    "p": 4,
    "x": 153.2,
-   "y": 301.1
+   "y": 387.31
   },
   "Pain over heart": {
    "p": 4,
    "x": 238.7,
-   "y": 301.1
+   "y": 387.31
   },
   "Asthma": {
    "p": 4,
    "x": 322.6,
-   "y": 301.1
+   "y": 387.31
   },
   "Nose bleeds": {
    "p": 4,
    "x": 406.6,
-   "y": 301.1
+   "y": 387.31
   },
   "Cramps or backache": {
    "p": 4,
    "x": 489.1,
-   "y": 301.1
+   "y": 387.31
   },
   "Numbness": {
    "p": 4,
    "x": 58.6,
-   "y": 274.7
+   "y": 369.36
   },
   "Venereal disease": {
    "p": 4,
    "x": 153.2,
-   "y": 274.7
+   "y": 369.36
   },
   "Poor circulation": {
    "p": 4,
    "x": 238.7,
-   "y": 274.7
+   "y": 369.36
   },
   "Colds": {
    "p": 4,
    "x": 322.6,
-   "y": 274.7
+   "y": 369.36
   },
   "Cancer": {
    "p": 4,
    "x": 406.6,
-   "y": 274.7
+   "y": 369.36
   },
   "Excessive menses": {
    "p": 4,
    "x": 489.1,
-   "y": 274.7
+   "y": 369.36
   },
   "Arthritis": {
    "p": 4,
    "x": 58.6,
-   "y": 248.2
+   "y": 351.3
   },
   "Nervous depression": {
    "p": 4,
    "x": 153.2,
-   "y": 248.2
+   "y": 351.3
   },
   "Rapid heart beat": {
    "p": 4,
    "x": 238.7,
-   "y": 248.2
+   "y": 351.3
   },
   "Deafness": {
    "p": 4,
    "x": 322.6,
-   "y": 248.2
+   "y": 351.3
   },
   "Pleurisy": {
    "p": 4,
    "x": 406.6,
-   "y": 248.2
+   "y": 351.3
   },
   "Hot flashes": {
    "p": 4,
    "x": 489.1,
-   "y": 248.2
+   "y": 351.3
   },
   "Bursitis": {
    "p": 4,
    "x": 58.6,
-   "y": 221.8
+   "y": 333.34
   },
   "Colon trouble": {
    "p": 4,
    "x": 153.2,
-   "y": 221.8
+   "y": 333.34
   },
   "Slow heart beat": {
    "p": 4,
    "x": 238.7,
-   "y": 221.8
+   "y": 333.34
   },
   "Ear noise": {
    "p": 4,
    "x": 322.6,
-   "y": 221.8
+   "y": 333.34
   },
   "Spitting": {
    "p": 4,
    "x": 406.6,
-   "y": 221.8
+   "y": 333.34
   },
   "Irregular cycle": {
    "p": 4,
    "x": 489.1,
-   "y": 221.8
+   "y": 333.34
   },
   "Foot trouble": {
    "p": 4,
    "x": 58.6,
-   "y": 195.3
+   "y": 315.29
   },
   "Diarrhea": {
    "p": 4,
    "x": 153.2,
-   "y": 195.3
+   "y": 315.29
   },
   "Anemia": {
    "p": 4,
    "x": 238.7,
-   "y": 195.3
+   "y": 315.29
   },
   "Enlarged thyroid": {
    "p": 4,
    "x": 322.6,
-   "y": 195.3
+   "y": 315.29
   },
   "Itching": {
    "p": 4,
    "x": 406.6,
-   "y": 195.3
+   "y": 315.29
   },
   "Lumps in breast": {
    "p": 4,
    "x": 489.1,
-   "y": 195.3
+   "y": 315.29
   },
   "Alcoholism": {
    "p": 4,
    "x": 58.6,
-   "y": 168.9
+   "y": 297.33
   },
   "Diabetes": {
    "p": 4,
    "x": 153.2,
-   "y": 168.9
+   "y": 297.33
   },
   "Glaucoma": {
    "p": 4,
    "x": 238.7,
-   "y": 168.9
+   "y": 297.33
   },
   "Autoimmune disease": {
    "p": 4,
    "x": 322.6,
-   "y": 168.9
+   "y": 297.33
   },
   "Mental disorder": {
    "p": 4,
    "x": 406.6,
-   "y": 168.9
+   "y": 297.33
   },
   "Balance/coordination": {
    "p": 4,
    "x": 489.1,
-   "y": 168.9
+   "y": 297.33
   },
   "Epilepsy": {
    "p": 4,
    "x": 58.6,
-   "y": 142.4
+   "y": 279.27
   },
   "Polio": {
    "p": 4,
    "x": 153.2,
-   "y": 142.4
+   "y": 279.27
   }
  },
  "family_doctor": {
   "p": 4,
   "x": 91.7,
-  "y": 113.4,
+  "y": 250.27,
   "w": 176.3
  },
  "send_report": {
   "Yes": {
    "p": 4,
    "x": 194.5,
-   "y": 102.2
+   "y": 239.07
   },
   "No": {
    "p": 4,
    "x": 240.9,
-   "y": 102.2
+   "y": 239.07
   }
  },
  "payment_person": {
   "p": 4,
   "x": 214.7,
-  "y": 78.6,
+  "y": 215.47,
   "w": 242.8
  },
  "signature": {
-  "p": 5,
+  "p": 4,
   "x": 120.2,
-  "y": 694.0,
+  "y": 111.87,
   "w": 227.1
  },
  "signature_date": {
-  "p": 5,
+  "p": 4,
   "x": 491.8,
-  "y": 694.0,
+  "y": 111.87,
   "w": 80.7
  }
 };
